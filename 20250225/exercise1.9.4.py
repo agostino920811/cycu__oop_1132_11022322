@@ -1,0 +1,7 @@
+print(type(765))           
+print(type(2.718))          
+print(type('2 pi'))         
+print(type(abs(-7)))        
+print(type(abs(-7.0)))      
+print(type(abs))            
+print(type(int))           
