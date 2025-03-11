@@ -10,8 +10,8 @@ def fetch_tvbs_news():
         soup = BeautifulSoup(response.text, 'html.parser')
         headlines = soup.find_all('h2', class_='news_title')
         
-        for index, headline in enumerate(headlines, start=1):
-            print(f"{index}. {headline.text.strip()}")
+        for headline in headlines:
+            print(headline.text.strip())
     else:
         print(f"Failed to retrieve news. Status code: {response.status_code}")
 
