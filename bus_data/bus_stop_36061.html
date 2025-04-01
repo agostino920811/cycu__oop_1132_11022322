@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <script src="ajax2.js"></script>
+		<title>[懷生國中]公車動態資訊</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<link rel="shortcut icon" href="#">
+		<script language="JavaScript">
+			var TTEMap = {'0':'進站中','':'未發車','-1':'未發車','-2':'交管不停','-3':'末班已過','-4':'今日未營運'};
+			var Timer = null;
+		    var divIndex=0;
+
+	    	function switchDiv() {
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			{
+	    			if (document.getElementById("IgnoreCheck"+divIndex))
+	    				if (document.getElementById("IgnoreCheck"+divIndex).checked)
+	    					localStorage.setItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value, "Yes");
+	    			document.getElementById("SDIV"+divIndex).style.display='none';
+	    			};
+	    		divIndex++;
+	    		while (document.getElementById("IgnoreCheck"+divIndex) 
+	    				&& localStorage.getItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value)=="Yes")
+	    		{divIndex++;};
+	    		
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			document.getElementById("SDIV"+divIndex).style.display='';
+	    	}
+			
+	        function queryDyna() {
+	        	if (Timer!=null) clearTimeout(Timer);
+	        	http('GET', 'StopLocationDyna?stoplocationid=2350', processDyna);
+	        }
+	        
+	    	function processDyna(data) {
+				if (data.UpdateTime)
+					{
+					document.getElementById("spnUpdateTime").innerHTML= data.UpdateTime.substring(11);
+					
+					for (var i=0;i<data.Stop.length;i++)
+						{
+						if (data.Stop[i].n1==null) continue;
+						var arrN1 = data.Stop[i].n1.split(',');
+						var tteTD = document.getElementById("tte"+arrN1[1]);
+						var tteHTML="";
+						
+						if (tteTD)
+						   {
+								if (TTEMap.hasOwnProperty(arrN1[7]))
+									tteHTML= TTEMap[arrN1[7]];
+								else
+										{
+							 			var tte=parseInt(arrN1[7],10);
+							 			if (tte>0 && tte<180)
+							 				tteHTML= "將到站";
+							 			else
+							 				tteHTML= Math.floor(tte/60)+"分";
+										};
+								
+								if (tteTD.getAttribute("data-deptimen1")=="Y")
+									{
+									
+											if (arrN1[3].indexOf("&#x3a;")>-1) if (arrN1[7]=="-1" || parseInt(arrN1[7],10)>5940) tteHTML=arrN1[3]+" 發車"; 
+									
+									};
+										
+								tteTD.innerHTML=tteHTML;
+						   };
+						};
+					};
+				Timer=setTimeout(queryDyna,60000);
+	    	}
+		</script>
+	</head>
+	<body onload="switchDiv();queryDyna();">
+		<center>
+		<div id="SDIV1" style="">
+
+		<table class="formattable1">
+    	
+        	<tbody><tr>
+	            <th class="title1"><a href="index.jsp" class="title1">行動查詢系統</a></th>
+        	</tr>
+    	
+			<tr>
+				<th class="title2"><a href="routelist.jsp" class="title2">查詢公車動態資訊</a></th>
+			</tr>
+			<tr>
+				<th class="title4">懷生國中<br><span class="updatetime">(更新時間：<span id="spnUpdateTime">20:39:35</span>&nbsp;<input type="button" value="立刻更新" onclick="queryDyna();">)</span></th>
+			</tr>
+		</tbody></table>
+    	
+			<marquee scrollamount="4" class="marqueetd" width="100%">2025雙北世壯運在臺北，5/17-5/30一起為選手加油!</marquee>
+    	
+		<table class="formattable1">
+			<tbody><tr>
+				<td width="100%" valign="top">
+				    <table border="0" width="100%">
+				      <tbody><tr>
+                        <th class="ttegotitle">路線</th>
+                        <th class="ttegotitle">站牌</th>
+                        <th class="ttegotitle">去返程</th>
+                        <th class="ttegotitle">預估到站</th>
+                      </tr>
+                      <tr class="ttego1"><td><a href="route.jsp?rid=18011">1579 臺北市區→基隆市中正區</a></td><td><a href="stop.jsp?from=sl&amp;sid=200136">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte200136" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=18013">1579A 臺北市區→基隆市中正區(經中正路)</a></td><td><a href="stop.jsp?from=sl&amp;sid=200184">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte200184" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=19562">1579C 懷生國中→基隆市中正區(經中正路)</a></td><td><a href="stop.jsp?from=sl&amp;sid=218993">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte218993" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=17156">1800 中崙→基隆</a></td><td><a href="stop.jsp?from=sl&amp;sid=165915">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte165915" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=18892">1813D 臺北→基隆[經中山區]</a></td><td><a href="stop.jsp?from=sl&amp;sid=211362">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte211362" data-deptimen1="Y">9分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=19363">1813E 臺北→基隆[大武崙]</a></td><td><a href="stop.jsp?from=sl&amp;sid=216801">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte216801" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=17176">1815 臺北→金山青年活動中心</a></td><td><a href="stop.jsp?from=sl&amp;sid=166368">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte166368" data-deptimen1="Y">將到站</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=17178">1815A 臺北→金山青年活動中心[法鼓山]</a></td><td><a href="stop.jsp?from=sl&amp;sid=166472">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte166472" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=17494">1815D 臺北→金山青年活動中心[臺北至萬里]</a></td><td><a href="stop.jsp?from=sl&amp;sid=177337">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte177337" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=18895">1815E 臺北→金山青年活動中心[法鼓文理學院]</a></td><td><a href="stop.jsp?from=sl&amp;sid=211439">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte211439" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=11212">204</a></td><td><a href="stop.jsp?from=sl&amp;sid=18297">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte18297" data-deptimen1="Y">13分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10912">212</a></td><td><a href="stop.jsp?from=sl&amp;sid=58918">懷生國中</a></td><td align="center">返程</td><td align="center" id="tte58918" data-deptimen1="Y">4分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16132">212夜</a></td><td><a href="stop.jsp?from=sl&amp;sid=125363">懷生國中</a></td><td align="center">返程</td><td align="center" id="tte125363" data-deptimen1="Y">23:00 發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10911">212直</a></td><td><a href="stop.jsp?from=sl&amp;sid=10842">懷生國中</a></td><td align="center">返程</td><td align="center" id="tte10842" data-deptimen1="Y">4分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10419">232快</a></td><td><a href="stop.jsp?from=sl&amp;sid=36149">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte36149" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10961">262</a></td><td><a href="stop.jsp?from=sl&amp;sid=40550">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte40550" data-deptimen1="Y">28分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10962">262區</a></td><td><a href="stop.jsp?from=sl&amp;sid=40677">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte40677" data-deptimen1="Y">8分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=11411">299</a></td><td><a href="stop.jsp?from=sl&amp;sid=10181">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte10181" data-deptimen1="Y">3分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=15571">600</a></td><td><a href="stop.jsp?from=sl&amp;sid=45498">懷生國中</a></td><td align="center">返程</td><td align="center" id="tte45498" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=15514">605</a></td><td><a href="stop.jsp?from=sl&amp;sid=46028">懷生國中</a></td><td align="center">返程</td><td align="center" id="tte46028" data-deptimen1="Y">8分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=15518">605新台五</a></td><td><a href="stop.jsp?from=sl&amp;sid=46127">懷生國中</a></td><td align="center">返程</td><td align="center" id="tte46127" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10417">忠孝幹線</a></td><td><a href="stop.jsp?from=sl&amp;sid=36061">懷生國中</a></td><td align="center">去程</td><td align="center" id="tte36061" data-deptimen1="Y">4分</td></tr>
+
+                    </tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+		</div>
+
+	
+</center></body></html>

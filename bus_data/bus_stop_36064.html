@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <script src="ajax2.js"></script>
+		<title>[捷運忠孝敦化站]公車動態資訊</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<link rel="shortcut icon" href="#">
+		<script language="JavaScript">
+			var TTEMap = {'0':'進站中','':'未發車','-1':'未發車','-2':'交管不停','-3':'末班已過','-4':'今日未營運'};
+			var Timer = null;
+		    var divIndex=0;
+
+	    	function switchDiv() {
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			{
+	    			if (document.getElementById("IgnoreCheck"+divIndex))
+	    				if (document.getElementById("IgnoreCheck"+divIndex).checked)
+	    					localStorage.setItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value, "Yes");
+	    			document.getElementById("SDIV"+divIndex).style.display='none';
+	    			};
+	    		divIndex++;
+	    		while (document.getElementById("IgnoreCheck"+divIndex) 
+	    				&& localStorage.getItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value)=="Yes")
+	    		{divIndex++;};
+	    		
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			document.getElementById("SDIV"+divIndex).style.display='';
+	    	}
+			
+	        function queryDyna() {
+	        	if (Timer!=null) clearTimeout(Timer);
+	        	http('GET', 'StopLocationDyna?stoplocationid=2318', processDyna);
+	        }
+	        
+	    	function processDyna(data) {
+				if (data.UpdateTime)
+					{
+					document.getElementById("spnUpdateTime").innerHTML= data.UpdateTime.substring(11);
+					
+					for (var i=0;i<data.Stop.length;i++)
+						{
+						if (data.Stop[i].n1==null) continue;
+						var arrN1 = data.Stop[i].n1.split(',');
+						var tteTD = document.getElementById("tte"+arrN1[1]);
+						var tteHTML="";
+						
+						if (tteTD)
+						   {
+								if (TTEMap.hasOwnProperty(arrN1[7]))
+									tteHTML= TTEMap[arrN1[7]];
+								else
+										{
+							 			var tte=parseInt(arrN1[7],10);
+							 			if (tte>0 && tte<180)
+							 				tteHTML= "將到站";
+							 			else
+							 				tteHTML= Math.floor(tte/60)+"分";
+										};
+								
+								if (tteTD.getAttribute("data-deptimen1")=="Y")
+									{
+									
+											if (arrN1[3].indexOf("&#x3a;")>-1) if (arrN1[7]=="-1" || parseInt(arrN1[7],10)>5940) tteHTML=arrN1[3]+" 發車"; 
+									
+									};
+										
+								tteTD.innerHTML=tteHTML;
+						   };
+						};
+					};
+				Timer=setTimeout(queryDyna,60000);
+	    	}
+		</script>
+	</head>
+	<body onload="switchDiv();queryDyna();">
+		<center>
+		<div id="SDIV1" style="">
+
+		<table class="formattable1">
+    	
+        	<tbody><tr>
+	            <th class="title1"><a href="index.jsp" class="title1">行動查詢系統</a></th>
+        	</tr>
+    	
+			<tr>
+				<th class="title2"><a href="routelist.jsp" class="title2">查詢公車動態資訊</a></th>
+			</tr>
+			<tr>
+				<th class="title4">捷運忠孝敦化站<br><span class="updatetime">(更新時間：<span id="spnUpdateTime">20:39:42</span>&nbsp;<input type="button" value="立刻更新" onclick="queryDyna();">)</span></th>
+			</tr>
+		</tbody></table>
+    	
+			<marquee scrollamount="4" class="marqueetd" width="100%">2025雙北世壯運在臺北，5/17-5/30一起為選手加油!</marquee>
+    	
+		<table class="formattable1">
+			<tbody><tr>
+				<td width="100%" valign="top">
+				    <table border="0" width="100%">
+				      <tbody><tr>
+                        <th class="ttegotitle">路線</th>
+                        <th class="ttegotitle">站牌</th>
+                        <th class="ttegotitle">去返程</th>
+                        <th class="ttegotitle">預估到站</th>
+                      </tr>
+                      <tr class="ttego1"><td><a href="route.jsp?rid=18011">1579 臺北市區→基隆市中正區</a></td><td><a href="stop.jsp?from=sl&amp;sid=200137">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte200137" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=18013">1579A 臺北市區→基隆市中正區(經中正路)</a></td><td><a href="stop.jsp?from=sl&amp;sid=200185">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte200185" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=19562">1579C 懷生國中→基隆市中正區(經中正路)</a></td><td><a href="stop.jsp?from=sl&amp;sid=218994">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte218994" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=17156">1800 中崙→基隆</a></td><td><a href="stop.jsp?from=sl&amp;sid=165916">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte165916" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=18892">1813D 臺北→基隆[經中山區]</a></td><td><a href="stop.jsp?from=sl&amp;sid=211363">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte211363" data-deptimen1="Y">12分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=19363">1813E 臺北→基隆[大武崙]</a></td><td><a href="stop.jsp?from=sl&amp;sid=216802">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte216802" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=17176">1815 臺北→金山青年活動中心</a></td><td><a href="stop.jsp?from=sl&amp;sid=166369">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte166369" data-deptimen1="Y">將到站</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=17178">1815A 臺北→金山青年活動中心[法鼓山]</a></td><td><a href="stop.jsp?from=sl&amp;sid=166473">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte166473" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=17494">1815D 臺北→金山青年活動中心[臺北至萬里]</a></td><td><a href="stop.jsp?from=sl&amp;sid=177338">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte177338" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=18895">1815E 臺北→金山青年活動中心[法鼓文理學院]</a></td><td><a href="stop.jsp?from=sl&amp;sid=211440">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte211440" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=11212">204</a></td><td><a href="stop.jsp?from=sl&amp;sid=18300">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte18300" data-deptimen1="Y">進站中</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10912">212</a></td><td><a href="stop.jsp?from=sl&amp;sid=10680">捷運忠孝敦化站</a></td><td align="center">返程</td><td align="center" id="tte10680" data-deptimen1="Y">7分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16132">212夜</a></td><td><a href="stop.jsp?from=sl&amp;sid=125366">捷運忠孝敦化站</a></td><td align="center">返程</td><td align="center" id="tte125366" data-deptimen1="Y">23:00 發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10911">212直</a></td><td><a href="stop.jsp?from=sl&amp;sid=10845">捷運忠孝敦化站</a></td><td align="center">返程</td><td align="center" id="tte10845" data-deptimen1="Y">7分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10419">232快</a></td><td><a href="stop.jsp?from=sl&amp;sid=36152">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte36152" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10283">235</a></td><td><a href="stop.jsp?from=sl&amp;sid=18582">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte18582" data-deptimen1="Y">7分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=11411">299</a></td><td><a href="stop.jsp?from=sl&amp;sid=10184">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte10184" data-deptimen1="Y">5分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=15571">600</a></td><td><a href="stop.jsp?from=sl&amp;sid=45501">捷運忠孝敦化站</a></td><td align="center">返程</td><td align="center" id="tte45501" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10282">663</a></td><td><a href="stop.jsp?from=sl&amp;sid=20975">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte20975" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=16633">919</a></td><td><a href="stop.jsp?from=sl&amp;sid=163255">捷運忠孝敦化站</a></td><td align="center">返程</td><td align="center" id="tte163255" data-deptimen1="Y">64分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10417">忠孝幹線</a></td><td><a href="stop.jsp?from=sl&amp;sid=36064">捷運忠孝敦化站</a></td><td align="center">去程</td><td align="center" id="tte36064" data-deptimen1="Y">8分</td></tr>
+
+                    </tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+		</div>
+
+	
+</center></body></html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <script src="ajax2.js"></script>
+		<title>[建和新村]公車動態資訊</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<link rel="shortcut icon" href="#">
+		<script language="JavaScript">
+			var TTEMap = {'0':'進站中','':'未發車','-1':'未發車','-2':'交管不停','-3':'末班已過','-4':'今日未營運'};
+			var Timer = null;
+		    var divIndex=0;
+
+	    	function switchDiv() {
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			{
+	    			if (document.getElementById("IgnoreCheck"+divIndex))
+	    				if (document.getElementById("IgnoreCheck"+divIndex).checked)
+	    					localStorage.setItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value, "Yes");
+	    			document.getElementById("SDIV"+divIndex).style.display='none';
+	    			};
+	    		divIndex++;
+	    		while (document.getElementById("IgnoreCheck"+divIndex) 
+	    				&& localStorage.getItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value)=="Yes")
+	    		{divIndex++;};
+	    		
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			document.getElementById("SDIV"+divIndex).style.display='';
+	    	}
+			
+	        function queryDyna() {
+	        	if (Timer!=null) clearTimeout(Timer);
+	        	http('GET', 'StopLocationDyna?stoplocationid=3441', processDyna);
+	        }
+	        
+	    	function processDyna(data) {
+				if (data.UpdateTime)
+					{
+					document.getElementById("spnUpdateTime").innerHTML= data.UpdateTime.substring(11);
+					
+					for (var i=0;i<data.Stop.length;i++)
+						{
+						if (data.Stop[i].n1==null) continue;
+						var arrN1 = data.Stop[i].n1.split(',');
+						var tteTD = document.getElementById("tte"+arrN1[1]);
+						var tteHTML="";
+						
+						if (tteTD)
+						   {
+								if (TTEMap.hasOwnProperty(arrN1[7]))
+									tteHTML= TTEMap[arrN1[7]];
+								else
+										{
+							 			var tte=parseInt(arrN1[7],10);
+							 			if (tte>0 && tte<180)
+							 				tteHTML= "將到站";
+							 			else
+							 				tteHTML= Math.floor(tte/60)+"分";
+										};
+								
+								if (tteTD.getAttribute("data-deptimen1")=="Y")
+									{
+									
+											if (arrN1[3].indexOf("&#x3a;")>-1) if (arrN1[7]=="-1" || parseInt(arrN1[7],10)>5940) tteHTML=arrN1[3]+" 發車"; 
+									
+									};
+										
+								tteTD.innerHTML=tteHTML;
+						   };
+						};
+					};
+				Timer=setTimeout(queryDyna,60000);
+	    	}
+		</script>
+	</head>
+	<body onload="switchDiv();queryDyna();">
+		<center>
+		<div id="SDIV1" style="">
+
+		<table class="formattable1">
+    	
+        	<tbody><tr>
+	            <th class="title1"><a href="index.jsp" class="title1">行動查詢系統</a></th>
+        	</tr>
+    	
+			<tr>
+				<th class="title2"><a href="routelist.jsp" class="title2">查詢公車動態資訊</a></th>
+			</tr>
+			<tr>
+				<th class="title4">建和新村<br><span class="updatetime">(更新時間：<span id="spnUpdateTime"></span>&nbsp;<input type="button" value="立刻更新" onclick="queryDyna();">)</span></th>
+			</tr>
+		</tbody></table>
+    	
+			<marquee scrollamount="4" class="marqueetd" width="100%">2025雙北世壯運在臺北，5/17-5/30一起為選手加油!</marquee>
+    	
+		<table class="formattable1">
+			<tbody><tr>
+				<td width="100%" valign="top">
+				    <table border="0" width="100%">
+				      <tbody><tr>
+                        <th class="ttegotitle">路線</th>
+                        <th class="ttegotitle">站牌</th>
+                        <th class="ttegotitle">去返程</th>
+                        <th class="ttegotitle">預估到站</th>
+                      </tr>
+                      <tr class="ttego1"><td><a href="route.jsp?rid=10415">221</a></td><td><a href="stop.jsp?from=sl&amp;sid=35832">建和新村</a></td><td align="center">去程</td><td align="center" id="tte35832" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10443">225</a></td><td><a href="stop.jsp?from=sl&amp;sid=10022">建和新村</a></td><td align="center">去程</td><td align="center" id="tte10022" data-deptimen1="Y"></td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16128">225區</a></td><td><a href="stop.jsp?from=sl&amp;sid=58249">建和新村</a></td><td align="center">去程</td><td align="center" id="tte58249" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10419">232快</a></td><td><a href="stop.jsp?from=sl&amp;sid=36144">建和新村</a></td><td align="center">去程</td><td align="center" id="tte36144" data-deptimen1="Y"></td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16588">264</a></td><td><a href="stop.jsp?from=sl&amp;sid=138742">建和新村</a></td><td align="center">返程</td><td align="center" id="tte138742" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10473">306</a></td><td><a href="stop.jsp?from=sl&amp;sid=36849">建和新村</a></td><td align="center">去程</td><td align="center" id="tte36849" data-deptimen1="Y"></td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=11243">39</a></td><td><a href="stop.jsp?from=sl&amp;sid=42787">建和新村</a></td><td align="center">去程</td><td align="center" id="tte42787" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=15664">39夜</a></td><td><a href="stop.jsp?from=sl&amp;sid=50701">建和新村</a></td><td align="center">去程</td><td align="center" id="tte50701" data-deptimen1="Y"></td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10441">508</a></td><td><a href="stop.jsp?from=sl&amp;sid=36238">建和新村</a></td><td align="center">去程</td><td align="center" id="tte36238" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10442">508區</a></td><td><a href="stop.jsp?from=sl&amp;sid=36364">建和新村</a></td><td align="center">去程</td><td align="center" id="tte36364" data-deptimen1="Y"></td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=11241">662</a></td><td><a href="stop.jsp?from=sl&amp;sid=27066">建和新村</a></td><td align="center">去程</td><td align="center" id="tte27066" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=16517">704</a></td><td><a href="stop.jsp?from=sl&amp;sid=131521">建和新村</a></td><td align="center">去程</td><td align="center" id="tte131521" data-deptimen1="Y"></td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16693">785</a></td><td><a href="stop.jsp?from=sl&amp;sid=150149">建和新村</a></td><td align="center">去程</td><td align="center" id="tte150149" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=16591">857</a></td><td><a href="stop.jsp?from=sl&amp;sid=139051">建和新村</a></td><td align="center">去程</td><td align="center" id="tte139051" data-deptimen1="Y"></td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10417">忠孝幹線</a></td><td><a href="stop.jsp?from=sl&amp;sid=36032">建和新村</a></td><td align="center">去程</td><td align="center" id="tte36032" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=16593">橘18</a></td><td><a href="stop.jsp?from=sl&amp;sid=139246">建和新村</a></td><td align="center">去程</td><td align="center" id="tte139246" data-deptimen1="Y"></td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16748">橘18福隆路</a></td><td><a href="stop.jsp?from=sl&amp;sid=155512">建和新村</a></td><td align="center">去程</td><td align="center" id="tte155512" data-deptimen1="Y"></td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=17360">藍1</a></td><td><a href="stop.jsp?from=sl&amp;sid=171609">建和新村</a></td><td align="center">去程</td><td align="center" id="tte171609" data-deptimen1="Y"></td></tr>
+
+                    </tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+		</div>
+
+	
+</center><div id="JSMX_loading"></div></body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <script src="ajax2.js"></script>
+		<title>[正義郵局]公車動態資訊</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<link rel="shortcut icon" href="#">
+		<script language="JavaScript">
+			var TTEMap = {'0':'進站中','':'未發車','-1':'未發車','-2':'交管不停','-3':'末班已過','-4':'今日未營運'};
+			var Timer = null;
+		    var divIndex=0;
+
+	    	function switchDiv() {
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			{
+	    			if (document.getElementById("IgnoreCheck"+divIndex))
+	    				if (document.getElementById("IgnoreCheck"+divIndex).checked)
+	    					localStorage.setItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value, "Yes");
+	    			document.getElementById("SDIV"+divIndex).style.display='none';
+	    			};
+	    		divIndex++;
+	    		while (document.getElementById("IgnoreCheck"+divIndex) 
+	    				&& localStorage.getItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value)=="Yes")
+	    		{divIndex++;};
+	    		
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			document.getElementById("SDIV"+divIndex).style.display='';
+	    	}
+			
+	        function queryDyna() {
+	        	if (Timer!=null) clearTimeout(Timer);
+	        	http('GET', 'StopLocationDyna?stoplocationid=2234', processDyna);
+	        }
+	        
+	    	function processDyna(data) {
+				if (data.UpdateTime)
+					{
+					document.getElementById("spnUpdateTime").innerHTML= data.UpdateTime.substring(11);
+					
+					for (var i=0;i<data.Stop.length;i++)
+						{
+						if (data.Stop[i].n1==null) continue;
+						var arrN1 = data.Stop[i].n1.split(',');
+						var tteTD = document.getElementById("tte"+arrN1[1]);
+						var tteHTML="";
+						
+						if (tteTD)
+						   {
+								if (TTEMap.hasOwnProperty(arrN1[7]))
+									tteHTML= TTEMap[arrN1[7]];
+								else
+										{
+							 			var tte=parseInt(arrN1[7],10);
+							 			if (tte>0 && tte<180)
+							 				tteHTML= "將到站";
+							 			else
+							 				tteHTML= Math.floor(tte/60)+"分";
+										};
+								
+								if (tteTD.getAttribute("data-deptimen1")=="Y")
+									{
+									
+											if (arrN1[3].indexOf("&#x3a;")>-1) if (arrN1[7]=="-1" || parseInt(arrN1[7],10)>5940) tteHTML=arrN1[3]+" 發車"; 
+									
+									};
+										
+								tteTD.innerHTML=tteHTML;
+						   };
+						};
+					};
+				Timer=setTimeout(queryDyna,60000);
+	    	}
+		</script>
+	</head>
+	<body onload="switchDiv();queryDyna();">
+		<center>
+		<div id="SDIV1" style="">
+
+		<table class="formattable1">
+    	
+        	<tbody><tr>
+	            <th class="title1"><a href="index.jsp" class="title1">行動查詢系統</a></th>
+        	</tr>
+    	
+			<tr>
+				<th class="title2"><a href="routelist.jsp" class="title2">查詢公車動態資訊</a></th>
+			</tr>
+			<tr>
+				<th class="title4">正義郵局<br><span class="updatetime">(更新時間：<span id="spnUpdateTime">20:39:31</span>&nbsp;<input type="button" value="立刻更新" onclick="queryDyna();">)</span></th>
+			</tr>
+		</tbody></table>
+    	
+			<marquee scrollamount="4" class="marqueetd" width="100%">2025雙北世壯運在臺北，5/17-5/30一起為選手加油!</marquee>
+    	
+		<table class="formattable1">
+			<tbody><tr>
+				<td width="100%" valign="top">
+				    <table border="0" width="100%">
+				      <tbody><tr>
+                        <th class="ttegotitle">路線</th>
+                        <th class="ttegotitle">站牌</th>
+                        <th class="ttegotitle">去返程</th>
+                        <th class="ttegotitle">預估到站</th>
+                      </tr>
+                      <tr class="ttego1"><td><a href="route.jsp?rid=17156">1800 中崙→基隆</a></td><td><a href="stop.jsp?from=sl&amp;sid=165914">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte165914" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=19363">1813E 臺北→基隆[大武崙]</a></td><td><a href="stop.jsp?from=sl&amp;sid=216800">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte216800" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=17176">1815 臺北→金山青年活動中心</a></td><td><a href="stop.jsp?from=sl&amp;sid=166367">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte166367" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=17178">1815A 臺北→金山青年活動中心[法鼓山]</a></td><td><a href="stop.jsp?from=sl&amp;sid=166471">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte166471" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=17494">1815D 臺北→金山青年活動中心[臺北至萬里]</a></td><td><a href="stop.jsp?from=sl&amp;sid=177336">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte177336" data-deptimen1="Y">未發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=18895">1815E 臺北→金山青年活動中心[法鼓文理學院]</a></td><td><a href="stop.jsp?from=sl&amp;sid=211438">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte211438" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=11212">204</a></td><td><a href="stop.jsp?from=sl&amp;sid=18296">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte18296" data-deptimen1="Y">11分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10912">212</a></td><td><a href="stop.jsp?from=sl&amp;sid=10677">正義郵局</a></td><td align="center">返程</td><td align="center" id="tte10677" data-deptimen1="Y">3分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16132">212夜</a></td><td><a href="stop.jsp?from=sl&amp;sid=125362">正義郵局</a></td><td align="center">返程</td><td align="center" id="tte125362" data-deptimen1="Y">23:00 發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10911">212直</a></td><td><a href="stop.jsp?from=sl&amp;sid=10841">正義郵局</a></td><td align="center">返程</td><td align="center" id="tte10841" data-deptimen1="Y">4分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10419">232快</a></td><td><a href="stop.jsp?from=sl&amp;sid=36148">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte36148" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10961">262</a></td><td><a href="stop.jsp?from=sl&amp;sid=40549">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte40549" data-deptimen1="Y">28分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10962">262區</a></td><td><a href="stop.jsp?from=sl&amp;sid=40676">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte40676" data-deptimen1="Y">7分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=11411">299</a></td><td><a href="stop.jsp?from=sl&amp;sid=10180">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte10180" data-deptimen1="Y">將到站</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=15571">600</a></td><td><a href="stop.jsp?from=sl&amp;sid=45497">正義郵局</a></td><td align="center">返程</td><td align="center" id="tte45497" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=15514">605</a></td><td><a href="stop.jsp?from=sl&amp;sid=46027">正義郵局</a></td><td align="center">返程</td><td align="center" id="tte46027" data-deptimen1="Y">8分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=15518">605新台五</a></td><td><a href="stop.jsp?from=sl&amp;sid=46126">正義郵局</a></td><td align="center">返程</td><td align="center" id="tte46126" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10417">忠孝幹線</a></td><td><a href="stop.jsp?from=sl&amp;sid=36060">正義郵局</a></td><td align="center">去程</td><td align="center" id="tte36060" data-deptimen1="Y">4分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16508">懷恩專車S33</a></td><td><a href="stop.jsp?from=sl&amp;sid=185569">正義郵局</a></td><td align="center">返程</td><td align="center" id="tte185569" data-deptimen1="Y">末班已過</td></tr>
+
+                    </tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+		</div>
+
+	
+</center></body></html>

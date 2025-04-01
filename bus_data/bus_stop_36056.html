@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <script src="ajax2.js"></script>
+		<title>[捷運善導寺站]公車動態資訊</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<link rel="shortcut icon" href="#">
+		<script language="JavaScript">
+			var TTEMap = {'0':'進站中','':'未發車','-1':'未發車','-2':'交管不停','-3':'末班已過','-4':'今日未營運'};
+			var Timer = null;
+		    var divIndex=0;
+
+	    	function switchDiv() {
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			{
+	    			if (document.getElementById("IgnoreCheck"+divIndex))
+	    				if (document.getElementById("IgnoreCheck"+divIndex).checked)
+	    					localStorage.setItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value, "Yes");
+	    			document.getElementById("SDIV"+divIndex).style.display='none';
+	    			};
+	    		divIndex++;
+	    		while (document.getElementById("IgnoreCheck"+divIndex) 
+	    				&& localStorage.getItem("PDANewsAlertIgnoew"+document.getElementById("IgnoreCheck"+divIndex).value)=="Yes")
+	    		{divIndex++;};
+	    		
+	    		if (document.getElementById("SDIV"+divIndex))
+	    			document.getElementById("SDIV"+divIndex).style.display='';
+	    	}
+			
+	        function queryDyna() {
+	        	if (Timer!=null) clearTimeout(Timer);
+	        	http('GET', 'StopLocationDyna?stoplocationid=1997', processDyna);
+	        }
+	        
+	    	function processDyna(data) {
+				if (data.UpdateTime)
+					{
+					document.getElementById("spnUpdateTime").innerHTML= data.UpdateTime.substring(11);
+					
+					for (var i=0;i<data.Stop.length;i++)
+						{
+						if (data.Stop[i].n1==null) continue;
+						var arrN1 = data.Stop[i].n1.split(',');
+						var tteTD = document.getElementById("tte"+arrN1[1]);
+						var tteHTML="";
+						
+						if (tteTD)
+						   {
+								if (TTEMap.hasOwnProperty(arrN1[7]))
+									tteHTML= TTEMap[arrN1[7]];
+								else
+										{
+							 			var tte=parseInt(arrN1[7],10);
+							 			if (tte>0 && tte<180)
+							 				tteHTML= "將到站";
+							 			else
+							 				tteHTML= Math.floor(tte/60)+"分";
+										};
+								
+								if (tteTD.getAttribute("data-deptimen1")=="Y")
+									{
+									
+											if (arrN1[3].indexOf("&#x3a;")>-1) if (arrN1[7]=="-1" || parseInt(arrN1[7],10)>5940) tteHTML=arrN1[3]+" 發車"; 
+									
+									};
+										
+								tteTD.innerHTML=tteHTML;
+						   };
+						};
+					};
+				Timer=setTimeout(queryDyna,60000);
+	    	}
+		</script>
+	</head>
+	<body onload="switchDiv();queryDyna();">
+		<center>
+		<div id="SDIV1" style="">
+
+		<table class="formattable1">
+    	
+        	<tbody><tr>
+	            <th class="title1"><a href="index.jsp" class="title1">行動查詢系統</a></th>
+        	</tr>
+    	
+			<tr>
+				<th class="title2"><a href="routelist.jsp" class="title2">查詢公車動態資訊</a></th>
+			</tr>
+			<tr>
+				<th class="title4">捷運善導寺站<br><span class="updatetime">(更新時間：<span id="spnUpdateTime">20:39:17</span>&nbsp;<input type="button" value="立刻更新" onclick="queryDyna();">)</span></th>
+			</tr>
+		</tbody></table>
+    	
+			<marquee scrollamount="4" class="marqueetd" width="100%">2025雙北世壯運在臺北，5/17-5/30一起為選手加油!</marquee>
+    	
+		<table class="formattable1">
+			<tbody><tr>
+				<td width="100%" valign="top">
+				    <table border="0" width="100%">
+				      <tbody><tr>
+                        <th class="ttegotitle">路線</th>
+                        <th class="ttegotitle">站牌</th>
+                        <th class="ttegotitle">去返程</th>
+                        <th class="ttegotitle">預估到站</th>
+                      </tr>
+                      <tr class="ttego1"><td><a href="route.jsp?rid=10181">205</a></td><td><a href="stop.jsp?from=sl&amp;sid=34754">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte34754" data-deptimen1="Y">將到站</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10912">212</a></td><td><a href="stop.jsp?from=sl&amp;sid=10673">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte10673" data-deptimen1="Y">44分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=16132">212夜</a></td><td><a href="stop.jsp?from=sl&amp;sid=125358">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte125358" data-deptimen1="Y">23:00 發車</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10911">212直</a></td><td><a href="stop.jsp?from=sl&amp;sid=10836">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte10836" data-deptimen1="Y">31分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10832">22</a></td><td><a href="stop.jsp?from=sl&amp;sid=11731">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte11731" data-deptimen1="Y">9分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10416">232</a></td><td><a href="stop.jsp?from=sl&amp;sid=220798">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte220798" data-deptimen1="Y">19分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10416">232</a></td><td><a href="stop.jsp?from=sl&amp;sid=35942">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte35942" data-deptimen1="Y">18分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10942">257</a></td><td><a href="stop.jsp?from=sl&amp;sid=10944">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte10944" data-deptimen1="Y">6分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10961">262</a></td><td><a href="stop.jsp?from=sl&amp;sid=40545">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte40545" data-deptimen1="Y">22分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=10962">262區</a></td><td><a href="stop.jsp?from=sl&amp;sid=40672">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte40672" data-deptimen1="Y">將到站</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10482">265區</a></td><td><a href="stop.jsp?from=sl&amp;sid=37102">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte37102" data-deptimen1="Y">7分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=16131">265夜</a></td><td><a href="stop.jsp?from=sl&amp;sid=58764">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte58764" data-deptimen1="Y">23:00 發車</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10481">265經中央路</a></td><td><a href="stop.jsp?from=sl&amp;sid=37024">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte37024" data-deptimen1="Y">48分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=11171">265經明德路</a></td><td><a href="stop.jsp?from=sl&amp;sid=42427">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte42427" data-deptimen1="Y">19分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=11851">276</a></td><td><a href="stop.jsp?from=sl&amp;sid=44161">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte44161" data-deptimen1="Y">16分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=11411">299</a></td><td><a href="stop.jsp?from=sl&amp;sid=10176">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte10176" data-deptimen1="Y">將到站</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=11243">39</a></td><td><a href="stop.jsp?from=sl&amp;sid=221848">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte221848" data-deptimen1="Y">6分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=15664">39夜</a></td><td><a href="stop.jsp?from=sl&amp;sid=221854">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte221854" data-deptimen1="Y">23:30 發車</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=15571">600</a></td><td><a href="stop.jsp?from=sl&amp;sid=45493">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte45493" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=16121">604</a></td><td><a href="stop.jsp?from=sl&amp;sid=219403">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte219403" data-deptimen1="Y">13分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=15514">605</a></td><td><a href="stop.jsp?from=sl&amp;sid=46023">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte46023" data-deptimen1="Y">將到站</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=15518">605新台五</a></td><td><a href="stop.jsp?from=sl&amp;sid=46122">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte46122" data-deptimen1="Y">末班已過</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10736">671</a></td><td><a href="stop.jsp?from=sl&amp;sid=17859">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte17859" data-deptimen1="Y">5分</td></tr>
+<tr class="ttego2"><td><a href="route.jsp?rid=11812">和平幹線</a></td><td><a href="stop.jsp?from=sl&amp;sid=43189">捷運善導寺站</a></td><td align="center">返程</td><td align="center" id="tte43189" data-deptimen1="Y">4分</td></tr>
+<tr class="ttego1"><td><a href="route.jsp?rid=10417">忠孝幹線</a></td><td><a href="stop.jsp?from=sl&amp;sid=36056">捷運善導寺站</a></td><td align="center">去程</td><td align="center" id="tte36056" data-deptimen1="Y">3分</td></tr>
+
+                    </tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+		</div>
+
+	
+</center></body></html>
