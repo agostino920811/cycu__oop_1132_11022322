@@ -1,44 +1,69 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.stats import lognorm
+import requests
+import csv
 
-def plot_lognormal_cdf(mu, sigma, x_range, output_file):
+def fetch_bus_data(route_id, output_file):
     """
-    繪製對數常態累積分布函數 (Log-normal CDF) 並儲存為 JPG 檔案。
-    
-    :param mu: 對數常態分布的 μ 參數
-    :param sigma: 對數常態分布的 σ 參數
-    :param x_range: x 軸範圍 (tuple，格式為 (start, end, num_points))
-    :param output_file: 輸出的 JPG 檔案名稱
+    從臺北市公開網站抓取指定公車代碼的資料，並輸出為 CSV 格式。
+
+    :param route_id: 公車代碼 (例如 '0100000A00')
+    :param output_file: 輸出的 CSV 檔案名稱
     """
-    # 計算對數常態分布的 s 和 scale
-    s = sigma
-    scale = np.exp(mu)
+    url = f"https://ebus.gov.taipei/Route/StopsOfRoute?routeid={route_id}"
+    try:
+        # 發送 GET 請求
+        response = requests.get(url)
+        response.raise_for_status()  # 檢查請求是否成功
 
-    # 定義 x 軸範圍
-    x = np.linspace(x_range[0], x_range[1], x_range[2])
+        # 調試用：檢查伺服器返回的內容
+        print("伺服器返回的內容：")
+        print(response.text)
 
-    # 計算累積分布函數 (CDF)
-    cdf = lognorm.cdf(x, s, scale=scale)
+        # 嘗試解析 JSON
+        try:
+            data = response.json()  # 將回應轉換為 JSON 格式
+        except ValueError:
+            print("伺服器返回的內容不是 JSON 格式：")
+            print(response.text)
+            return
 
-    # 繪製圖形
-    plt.figure(figsize=(8, 6))
-    plt.plot(x, cdf, label=f'Log-normal CDF (μ={mu}, σ={sigma})', color='blue')
-    plt.title('Log-normal Cumulative Distribution Function')
-    plt.xlabel('x')
-    plt.ylabel('CDF')
-    plt.grid(True)
-    plt.legend()
+        # 檢查資料是否有效
+        if not data or "Stops" not in data:
+            print("無法取得有效的公車資料，請檢查公車代碼是否正確。")
+            print("伺服器返回的資料結構：", data)
+            return
 
-    # 儲存為 JPG 檔案
-    plt.savefig(output_file, format='jpg')
-    plt.show()
+        print("資料結構檢查通過，開始解析 Stops 資料...")
+        stops = data.get("Stops", [])
+        if not stops:
+            print("伺服器返回的 Stops 資料為空。")
+            return
+
+        parsed_data = []
+        for stop in stops:
+            arrival_info = stop.get("ArrivalTime", "未知")
+            stop_number = stop.get("StopSequence", "未知")
+            stop_name = stop.get("StopName", {}).get("Zh_tw", "未知")
+            stop_id = stop.get("StopID", "未知")
+            latitude = stop.get("StopPosition", {}).get("PositionLat", "未知")
+            longitude = stop.get("StopPosition", {}).get("PositionLon", "未知")
+            parsed_data.append([arrival_info, stop_number, stop_name, stop_id, latitude, longitude])
+
+        print("開始寫入 CSV 檔案...")
+        # 將資料寫入 CSV
+        with open(output_file, mode="w", newline="", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow(["arrival_info", "stop_number", "stop_name", "stop_id", "latitude", "longitude"])
+            writer.writerows(parsed_data)
+
+        print(f"資料已成功儲存至 {output_file}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"無法取得資料，請檢查網路連線或公車代碼是否正確。錯誤訊息：{e}")
+    except Exception as e:
+        print(f"發生錯誤：{e}")
 
 # 測試函數
 if __name__ == "__main__":
-    mu = 1.5  # μ
-    sigma = 0.4  # σ
-    x_range = (0.01, 10, 500)  # x 軸範圍 (起始, 結束, 點數)
-    output_file = 'lognormal_cdf.jpg'  # 輸出檔案名稱
-
-    plot_lognormal_cdf(mu, sigma, x_range, output_file)
+    route_id = input("請輸入公車代碼 (例如 '0100000A00')：")
+    output_file = "bus_data.csv"
+    fetch_bus_data(route_id, output_file)
