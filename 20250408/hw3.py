@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import csv
 from playwright.sync_api import sync_playwright
@@ -26,10 +25,7 @@ class BusRouteInfo:
             page.goto(self.url)
             
             if self.direction == 'come':
-                try:
-                    page.click('a.stationlist-come-go-gray.stationlist-come')
-                except Exception as e:
-                    print(f"無法切換方向：{e}")
+                page.click('a.stationlist-come-go-gray.stationlist-come')
             
             # 等待站點資訊載入完成
             page.wait_for_selector('.auto-list-stationlist', timeout=10000)  # 最多等待 10 秒
