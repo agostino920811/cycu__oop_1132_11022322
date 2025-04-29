@@ -23,7 +23,7 @@ def draw_multiple_routes_with_highlight(input_files: list, outputfile: str, high
     station_found = False  # 紀錄是否找到站名
 
     # 載入圖片
-    image_path = "20250429/2.jpg"
+    image_path = "20250429/1.jpg"
     if not os.path.exists(image_path):
         raise FileNotFoundError(f"圖片檔案 {image_path} 不存在！")
     img = plt.imread(image_path)
