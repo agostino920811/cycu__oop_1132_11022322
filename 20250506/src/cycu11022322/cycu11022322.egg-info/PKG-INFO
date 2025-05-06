@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: cycu11022322
+Version: 0.1.0
+Summary: A short description of the cycu25305 package
+Author-email: ian <ian5041123@gmail.com>
+License: MIT
+Project-URL: Homepage, https://your-homepage-url.com
+Project-URL: Source, https://github.com/your-username/your-repo
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: greenlet==3.2.1
+Requires-Dist: numpy==2.2.5
+Requires-Dist: pandas==2.2.3
+Requires-Dist: playwright==1.52.0
+Requires-Dist: pyee==13.0.0
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: pytz==2025.2
+Requires-Dist: six==1.17.0
+Requires-Dist: SQLAlchemy==2.0.40
+Requires-Dist: typing_extensions==4.13.2
+Requires-Dist: tzdata==2025.2
