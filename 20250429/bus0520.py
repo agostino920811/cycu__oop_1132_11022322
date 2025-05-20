@@ -70,11 +70,10 @@ class BusRouteInfo:
         for stop in stops:
             print(f"{stop[0]}, {stop[1]}, {stop[2]}, {stop[3]}, {stop[4]}, {stop[5]}")
 
----
 
 ## Updated `main` Execution Block
 
-Here's the modified `if __name__ == "__main__":` block to allow user input for both `routeid` and `direction`:
+# Here's the modified `if __name__ == "__main__":` block to allow user input for both `routeid` and `direction`:
 
 ```python
 if __name__ == "__main__":
