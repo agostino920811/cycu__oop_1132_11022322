@@ -51,7 +51,7 @@ try:
         print(f"\n正在將資料寫入 {output_csv_file}...")
         with open(output_csv_file, 'w', newline='', encoding='utf-8-sig') as csvfile:
             # 定義 CSV 檔案的欄位名稱 (標題)
-            fieldnames = ['路線名稱', 'go_參數']
+            fieldnames = ['routename', 'routeid']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             
             # 寫入標題列
