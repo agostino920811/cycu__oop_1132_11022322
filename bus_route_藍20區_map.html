@@ -1,0 +1,3202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c72cf97c7846898134d1d7d3223859c3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                top: 10px; right: 10px; width: 200px; height: 140px; 
+                background-color: white; border:2px solid grey; z-index:9999; 
+                font-size:14px; padding: 10px">
+    <b>圖例說明</b><br>
+    🔴 進站中/即將到站<br>
+    🟠 5分鐘內<br>
+    🔵 5-15分鐘<br>
+    ⚫ 15分鐘以上/無資訊<br>
+    🚌 公車位置
+    </div>
+    
+    
+            <div class="folium-map" id="map_c72cf97c7846898134d1d7d3223859c3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_c72cf97c7846898134d1d7d3223859c3 = L.map(
+                "map_c72cf97c7846898134d1d7d3223859c3",
+                {
+                    center: [25.07282478125, 121.5815065203125],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2a88dc75d42b6a2176ca0d4bc34e0e3d = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2a88dc75d42b6a2176ca0d4bc34e0e3d.addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var marker_278cb61194fd2ff214ae0460761b7c9f = L.marker(
+                [25.056276, 121.607046],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_ae9a6f6ae9a9c5b602497010d5731b65 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_13bba978e49395745563c2508467d50c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_27bbb83b88268c6a6b3b8709c9c51963 = $(`<div id="html_27bbb83b88268c6a6b3b8709c9c51963" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港高工一</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 22分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 1<br>             <span style='color: #666;'><b>座標:</b></span> 25.056276, 121.607046         </div>         </div>`)[0];
+                popup_13bba978e49395745563c2508467d50c.setContent(html_27bbb83b88268c6a6b3b8709c9c51963);
+            
+        
+
+        marker_278cb61194fd2ff214ae0460761b7c9f.bindPopup(popup_13bba978e49395745563c2508467d50c)
+        ;
+
+        
+    
+    
+            marker_278cb61194fd2ff214ae0460761b7c9f.bindTooltip(
+                `<div>
+                     南港高工一 - 22分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_278cb61194fd2ff214ae0460761b7c9f.setIcon(icon_ae9a6f6ae9a9c5b602497010d5731b65);
+            
+    
+            var marker_5e5974d08f27c355c42931b416e6dc8f = L.marker(
+                [25.0534, 121.6069591],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_bc076e95c43bf9a93881a1cf2e87af95 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_879aa4ceb8dea2e9c01fdae132db228a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_906ee468be3b60ca91b7422399127b35 = $(`<div id="html_906ee468be3b60ca91b7422399127b35" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港車站</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 16分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 2<br>             <span style='color: #666;'><b>座標:</b></span> 25.053400, 121.606959         </div>         </div>`)[0];
+                popup_879aa4ceb8dea2e9c01fdae132db228a.setContent(html_906ee468be3b60ca91b7422399127b35);
+            
+        
+
+        marker_5e5974d08f27c355c42931b416e6dc8f.bindPopup(popup_879aa4ceb8dea2e9c01fdae132db228a)
+        ;
+
+        
+    
+    
+            marker_5e5974d08f27c355c42931b416e6dc8f.bindTooltip(
+                `<div>
+                     南港車站 - 16分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5e5974d08f27c355c42931b416e6dc8f.setIcon(icon_bc076e95c43bf9a93881a1cf2e87af95);
+            
+    
+            var marker_863b9e9200c6a635b567afea01fcb630 = L.marker(
+                [25.051778, 121.602893],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_433d77cafbdcb39dcc020c8c91fcca39 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_49b1ca93ae30050f31b71aded1277e52 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_176d6efe815794893ea7f1e93da1be2b = $(`<div id="html_176d6efe815794893ea7f1e93da1be2b" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港機廠</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 3<br>             <span style='color: #666;'><b>座標:</b></span> 25.051778, 121.602893         </div>         </div>`)[0];
+                popup_49b1ca93ae30050f31b71aded1277e52.setContent(html_176d6efe815794893ea7f1e93da1be2b);
+            
+        
+
+        marker_863b9e9200c6a635b567afea01fcb630.bindPopup(popup_49b1ca93ae30050f31b71aded1277e52)
+        ;
+
+        
+    
+    
+            marker_863b9e9200c6a635b567afea01fcb630.bindTooltip(
+                `<div>
+                     南港機廠 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_863b9e9200c6a635b567afea01fcb630.setIcon(icon_433d77cafbdcb39dcc020c8c91fcca39);
+            
+    
+            var marker_52b1b553e1d3cee0dd54b9228495352b = L.marker(
+                [25.050346, 121.593165],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_ee2baf1fb0569bdeace81dbbf4298581 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_876bc636c9ea6d71fa07a796d29dae0d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7bb63f6da417371ca121f9e354e05768 = $(`<div id="html_7bb63f6da417371ca121f9e354e05768" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>捷運昆陽站</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 4<br>             <span style='color: #666;'><b>座標:</b></span> 25.050346, 121.593165         </div>         </div>`)[0];
+                popup_876bc636c9ea6d71fa07a796d29dae0d.setContent(html_7bb63f6da417371ca121f9e354e05768);
+            
+        
+
+        marker_52b1b553e1d3cee0dd54b9228495352b.bindPopup(popup_876bc636c9ea6d71fa07a796d29dae0d)
+        ;
+
+        
+    
+    
+            marker_52b1b553e1d3cee0dd54b9228495352b.bindTooltip(
+                `<div>
+                     捷運昆陽站 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_52b1b553e1d3cee0dd54b9228495352b.setIcon(icon_ee2baf1fb0569bdeace81dbbf4298581);
+            
+    
+            var marker_5cb7a18975dd1933b5e9ef4373dddea0 = L.marker(
+                [25.050052, 121.59306],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_74143f9a457b83ace5b81fb4884fca7d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bcb4456f8ad0f26b9f3cde9aeef390c4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_dc045f33d9d16781c40e8323dea3659b = $(`<div id="html_dc045f33d9d16781c40e8323dea3659b" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>捷運昆陽站</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 5<br>             <span style='color: #666;'><b>座標:</b></span> 25.050052, 121.593060         </div>         </div>`)[0];
+                popup_bcb4456f8ad0f26b9f3cde9aeef390c4.setContent(html_dc045f33d9d16781c40e8323dea3659b);
+            
+        
+
+        marker_5cb7a18975dd1933b5e9ef4373dddea0.bindPopup(popup_bcb4456f8ad0f26b9f3cde9aeef390c4)
+        ;
+
+        
+    
+    
+            marker_5cb7a18975dd1933b5e9ef4373dddea0.bindTooltip(
+                `<div>
+                     捷運昆陽站 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5cb7a18975dd1933b5e9ef4373dddea0.setIcon(icon_74143f9a457b83ace5b81fb4884fca7d);
+            
+    
+            var marker_8b7a134d9ee8ca809eea2e6a4fc0b5bd = L.marker(
+                [25.052951, 121.5952331],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_5a095328f1ffc03b546757d47050c0e5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_073eae9da87ee743f4635c5b65a70257 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bf133be736a1aa1433973df33025e620 = $(`<div id="html_bf133be736a1aa1433973df33025e620" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港高中</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 8分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 6<br>             <span style='color: #666;'><b>座標:</b></span> 25.052951, 121.595233         </div>         </div>`)[0];
+                popup_073eae9da87ee743f4635c5b65a70257.setContent(html_bf133be736a1aa1433973df33025e620);
+            
+        
+
+        marker_8b7a134d9ee8ca809eea2e6a4fc0b5bd.bindPopup(popup_073eae9da87ee743f4635c5b65a70257)
+        ;
+
+        
+    
+    
+            marker_8b7a134d9ee8ca809eea2e6a4fc0b5bd.bindTooltip(
+                `<div>
+                     南港高中 - 8分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8b7a134d9ee8ca809eea2e6a4fc0b5bd.setIcon(icon_5a095328f1ffc03b546757d47050c0e5);
+            
+    
+            var marker_f9b00577a85f34a36f81f6a123358a8c = L.marker(
+                [25.055334, 121.5944152],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_ed13364b704323ba61dd522e50766b16 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1e2f61c06c8bb1f40174ef9a182fc6ca = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bd56935c566b214e930c712052efa3b0 = $(`<div id="html_bd56935c566b214e930c712052efa3b0" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港分局(向陽)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 7<br>             <span style='color: #666;'><b>座標:</b></span> 25.055334, 121.594415         </div>         </div>`)[0];
+                popup_1e2f61c06c8bb1f40174ef9a182fc6ca.setContent(html_bd56935c566b214e930c712052efa3b0);
+            
+        
+
+        marker_f9b00577a85f34a36f81f6a123358a8c.bindPopup(popup_1e2f61c06c8bb1f40174ef9a182fc6ca)
+        ;
+
+        
+    
+    
+            marker_f9b00577a85f34a36f81f6a123358a8c.bindTooltip(
+                `<div>
+                     南港分局(向陽) - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f9b00577a85f34a36f81f6a123358a8c.setIcon(icon_ed13364b704323ba61dd522e50766b16);
+            
+    
+            var marker_f5b21b012754852836730636a574119c = L.marker(
+                [25.061289, 121.591281],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_2b662af1c4fa65bec60ab5cc613ed4c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3276ea3e93eeeccab494fe5daa3ad74e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_92f87248fe006409a4dd233952e809c3 = $(`<div id="html_92f87248fe006409a4dd233952e809c3" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>石潭公園(成功)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 8<br>             <span style='color: #666;'><b>座標:</b></span> 25.061289, 121.591281         </div>         </div>`)[0];
+                popup_3276ea3e93eeeccab494fe5daa3ad74e.setContent(html_92f87248fe006409a4dd233952e809c3);
+            
+        
+
+        marker_f5b21b012754852836730636a574119c.bindPopup(popup_3276ea3e93eeeccab494fe5daa3ad74e)
+        ;
+
+        
+    
+    
+            marker_f5b21b012754852836730636a574119c.bindTooltip(
+                `<div>
+                     石潭公園(成功) - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f5b21b012754852836730636a574119c.setIcon(icon_2b662af1c4fa65bec60ab5cc613ed4c4);
+            
+    
+            var marker_09fc8d9405e072c8dd152392b5f9d231 = L.marker(
+                [25.066818, 121.5907148],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_bbb509e8cd067f1935b8a3c35ac24730 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8f38faeffd4615766b1d04e593d6f713 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_97ab51af09f632fe2540c62c463aa055 = $(`<div id="html_97ab51af09f632fe2540c62c463aa055" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>上灣仔</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 9<br>             <span style='color: #666;'><b>座標:</b></span> 25.066818, 121.590715         </div>         </div>`)[0];
+                popup_8f38faeffd4615766b1d04e593d6f713.setContent(html_97ab51af09f632fe2540c62c463aa055);
+            
+        
+
+        marker_09fc8d9405e072c8dd152392b5f9d231.bindPopup(popup_8f38faeffd4615766b1d04e593d6f713)
+        ;
+
+        
+    
+    
+            marker_09fc8d9405e072c8dd152392b5f9d231.bindTooltip(
+                `<div>
+                     上灣仔 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_09fc8d9405e072c8dd152392b5f9d231.setIcon(icon_bbb509e8cd067f1935b8a3c35ac24730);
+            
+    
+            var marker_7482b2bd006f3a8fdb530cb0cae267e6 = L.marker(
+                [25.067861, 121.5908537],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_e42b27cbcbc35aa84c60f27b4acc43e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9c49b4efe002c7d7fcb49ed579d607b4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_548b6c7d5979b77b7cb389bcdcca4dc7 = $(`<div id="html_548b6c7d5979b77b7cb389bcdcca4dc7" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>湖興</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 10<br>             <span style='color: #666;'><b>座標:</b></span> 25.067861, 121.590854         </div>         </div>`)[0];
+                popup_9c49b4efe002c7d7fcb49ed579d607b4.setContent(html_548b6c7d5979b77b7cb389bcdcca4dc7);
+            
+        
+
+        marker_7482b2bd006f3a8fdb530cb0cae267e6.bindPopup(popup_9c49b4efe002c7d7fcb49ed579d607b4)
+        ;
+
+        
+    
+    
+            marker_7482b2bd006f3a8fdb530cb0cae267e6.bindTooltip(
+                `<div>
+                     湖興 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7482b2bd006f3a8fdb530cb0cae267e6.setIcon(icon_e42b27cbcbc35aa84c60f27b4acc43e9);
+            
+    
+            var marker_873cce2e4d572175efaa68338284545e = L.marker(
+                [25.07121, 121.5900311],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_86fa8b1634aa2ea03bcd1f7d082501f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_824a2644d4354d343799e198c29590f0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1c90a8fd3e98f4f8beef9488d7b2328c = $(`<div id="html_1c90a8fd3e98f4f8beef9488d7b2328c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>國防醫學中心</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 11<br>             <span style='color: #666;'><b>座標:</b></span> 25.071210, 121.590031         </div>         </div>`)[0];
+                popup_824a2644d4354d343799e198c29590f0.setContent(html_1c90a8fd3e98f4f8beef9488d7b2328c);
+            
+        
+
+        marker_873cce2e4d572175efaa68338284545e.bindPopup(popup_824a2644d4354d343799e198c29590f0)
+        ;
+
+        
+    
+    
+            marker_873cce2e4d572175efaa68338284545e.bindTooltip(
+                `<div>
+                     國防醫學中心 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_873cce2e4d572175efaa68338284545e.setIcon(icon_86fa8b1634aa2ea03bcd1f7d082501f0);
+            
+    
+            var marker_65b68fa2107a18010fd00e2beb2db2d0 = L.marker(
+                [25.071852, 121.592095],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_59693a99377e4f72c9e93b6d406f04f7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_05b304581ed6f7a960d7bb88e28179ba = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_133997efdd6668029e1c6a34deb41fdd = $(`<div id="html_133997efdd6668029e1c6a34deb41fdd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>三總內湖站</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 12<br>             <span style='color: #666;'><b>座標:</b></span> 25.071852, 121.592095         </div>         </div>`)[0];
+                popup_05b304581ed6f7a960d7bb88e28179ba.setContent(html_133997efdd6668029e1c6a34deb41fdd);
+            
+        
+
+        marker_65b68fa2107a18010fd00e2beb2db2d0.bindPopup(popup_05b304581ed6f7a960d7bb88e28179ba)
+        ;
+
+        
+    
+    
+            marker_65b68fa2107a18010fd00e2beb2db2d0.bindTooltip(
+                `<div>
+                     三總內湖站 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_65b68fa2107a18010fd00e2beb2db2d0.setIcon(icon_59693a99377e4f72c9e93b6d406f04f7);
+            
+    
+            var marker_d6e1b00bac144bbc4c900bdd060d53e7 = L.marker(
+                [25.073809, 121.5900167],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_b4a5c7a1ecfc503386b165708ae60f9a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1f292887f3fe0e348ef60530e9347cc7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e8259a6d7187ee8ad53276c3e649986c = $(`<div id="html_e8259a6d7187ee8ad53276c3e649986c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>將軍嶺</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 22分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 13<br>             <span style='color: #666;'><b>座標:</b></span> 25.073809, 121.590017         </div>         </div>`)[0];
+                popup_1f292887f3fe0e348ef60530e9347cc7.setContent(html_e8259a6d7187ee8ad53276c3e649986c);
+            
+        
+
+        marker_d6e1b00bac144bbc4c900bdd060d53e7.bindPopup(popup_1f292887f3fe0e348ef60530e9347cc7)
+        ;
+
+        
+    
+    
+            marker_d6e1b00bac144bbc4c900bdd060d53e7.bindTooltip(
+                `<div>
+                     將軍嶺 - 22分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d6e1b00bac144bbc4c900bdd060d53e7.setIcon(icon_b4a5c7a1ecfc503386b165708ae60f9a);
+            
+    
+            var marker_d67fcac6d18d11eddddd7995823c4f1d = L.marker(
+                [25.076884, 121.5902313],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_66073d7a55c83192c15a3178605ec476 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_73b27359321ee12d783f6ca794a2ca77 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a62399a48004f0096e6a6418bdffac17 = $(`<div id="html_a62399a48004f0096e6a6418bdffac17" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>方濟中學</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 14<br>             <span style='color: #666;'><b>座標:</b></span> 25.076884, 121.590231         </div>         </div>`)[0];
+                popup_73b27359321ee12d783f6ca794a2ca77.setContent(html_a62399a48004f0096e6a6418bdffac17);
+            
+        
+
+        marker_d67fcac6d18d11eddddd7995823c4f1d.bindPopup(popup_73b27359321ee12d783f6ca794a2ca77)
+        ;
+
+        
+    
+    
+            marker_d67fcac6d18d11eddddd7995823c4f1d.bindTooltip(
+                `<div>
+                     方濟中學 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d67fcac6d18d11eddddd7995823c4f1d.setIcon(icon_66073d7a55c83192c15a3178605ec476);
+            
+    
+            var marker_b1876c10c6d7b6f57e70b538aca90078 = L.marker(
+                [25.079013, 121.5883097],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_699d5203e7f9e4925ffd0a5899c44950 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4e961bf8d34c726d0ae8664192f834e1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e3533ce443d3cfb4d68ace6cfe97d6cd = $(`<div id="html_e3533ce443d3cfb4d68ace6cfe97d6cd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>內湖高中</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 15<br>             <span style='color: #666;'><b>座標:</b></span> 25.079013, 121.588310         </div>         </div>`)[0];
+                popup_4e961bf8d34c726d0ae8664192f834e1.setContent(html_e3533ce443d3cfb4d68ace6cfe97d6cd);
+            
+        
+
+        marker_b1876c10c6d7b6f57e70b538aca90078.bindPopup(popup_4e961bf8d34c726d0ae8664192f834e1)
+        ;
+
+        
+    
+    
+            marker_b1876c10c6d7b6f57e70b538aca90078.bindTooltip(
+                `<div>
+                     內湖高中 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b1876c10c6d7b6f57e70b538aca90078.setIcon(icon_699d5203e7f9e4925ffd0a5899c44950);
+            
+    
+            var marker_eebe830556d2b341f803703b57ae1191 = L.marker(
+                [25.078585, 121.584249],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_a5781aadd082f0a71824d51385c4f242 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_76400f38d6e31767bb8cef39f9bb5ff3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_17951f4450b9488b8db8d588e4c9a03b = $(`<div id="html_17951f4450b9488b8db8d588e4c9a03b" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>捷運文德站(碧湖公園)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 3分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 16<br>             <span style='color: #666;'><b>座標:</b></span> 25.078585, 121.584249         </div>         </div>`)[0];
+                popup_76400f38d6e31767bb8cef39f9bb5ff3.setContent(html_17951f4450b9488b8db8d588e4c9a03b);
+            
+        
+
+        marker_eebe830556d2b341f803703b57ae1191.bindPopup(popup_76400f38d6e31767bb8cef39f9bb5ff3)
+        ;
+
+        
+    
+    
+            marker_eebe830556d2b341f803703b57ae1191.bindTooltip(
+                `<div>
+                     捷運文德站(碧湖公園) - 3分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_eebe830556d2b341f803703b57ae1191.setIcon(icon_a5781aadd082f0a71824d51385c4f242);
+            
+    
+            var marker_39403240c2356bec73a926c3f15d3694 = L.marker(
+                [25.07859, 121.58078],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_053260d42736f3cd72a9e30c356db54a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bbd239d5df68ea3702448ad8c76e741a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1e2bd38621ac864d3cd4b28d5ea51076 = $(`<div id="html_1e2bd38621ac864d3cd4b28d5ea51076" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>湖光國宅</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 23分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 17<br>             <span style='color: #666;'><b>座標:</b></span> 25.078590, 121.580780         </div>         </div>`)[0];
+                popup_bbd239d5df68ea3702448ad8c76e741a.setContent(html_1e2bd38621ac864d3cd4b28d5ea51076);
+            
+        
+
+        marker_39403240c2356bec73a926c3f15d3694.bindPopup(popup_bbd239d5df68ea3702448ad8c76e741a)
+        ;
+
+        
+    
+    
+            marker_39403240c2356bec73a926c3f15d3694.bindTooltip(
+                `<div>
+                     湖光國宅 - 23分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_39403240c2356bec73a926c3f15d3694.setIcon(icon_053260d42736f3cd72a9e30c356db54a);
+            
+    
+            var marker_b681aee95368634a4927542cedeb9214 = L.marker(
+                [25.079106, 121.5779835],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_043a00344a0fcc12ebab94d837a0cc63 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a407cdcc66c2ddbfa38a8da1906a4677 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c2d0f0db09ef6ab7f190b7b0f7d9c8a8 = $(`<div id="html_c2d0f0db09ef6ab7f190b7b0f7d9c8a8" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>西湖圖書館(湖光教會)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 18<br>             <span style='color: #666;'><b>座標:</b></span> 25.079106, 121.577984         </div>         </div>`)[0];
+                popup_a407cdcc66c2ddbfa38a8da1906a4677.setContent(html_c2d0f0db09ef6ab7f190b7b0f7d9c8a8);
+            
+        
+
+        marker_b681aee95368634a4927542cedeb9214.bindPopup(popup_a407cdcc66c2ddbfa38a8da1906a4677)
+        ;
+
+        
+    
+    
+            marker_b681aee95368634a4927542cedeb9214.bindTooltip(
+                `<div>
+                     西湖圖書館(湖光教會) - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b681aee95368634a4927542cedeb9214.setIcon(icon_043a00344a0fcc12ebab94d837a0cc63);
+            
+    
+            var marker_45f7ffeb0025587f1e02839d6a9806f3 = L.marker(
+                [25.080919, 121.5780678],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_2ac73ea550d2b8f96bd075b4af543aab = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7399eea261404d9091c1a3f3d697936f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a92f650758abe6d5c14ad464f3aea17c = $(`<div id="html_a92f650758abe6d5c14ad464f3aea17c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>港墘</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 12分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 19<br>             <span style='color: #666;'><b>座標:</b></span> 25.080919, 121.578068         </div>         </div>`)[0];
+                popup_7399eea261404d9091c1a3f3d697936f.setContent(html_a92f650758abe6d5c14ad464f3aea17c);
+            
+        
+
+        marker_45f7ffeb0025587f1e02839d6a9806f3.bindPopup(popup_7399eea261404d9091c1a3f3d697936f)
+        ;
+
+        
+    
+    
+            marker_45f7ffeb0025587f1e02839d6a9806f3.bindTooltip(
+                `<div>
+                     港墘 - 12分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_45f7ffeb0025587f1e02839d6a9806f3.setIcon(icon_2ac73ea550d2b8f96bd075b4af543aab);
+            
+    
+            var marker_487ce23ba1d5b9601178f82c8df406d3 = L.marker(
+                [25.082989, 121.5783099],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_b240b40c9e92170555403032680159c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8d7a5ea2498769983cbe45bb0288d35b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8eb739a9e6525bfa345ffeb5bc56dad1 = $(`<div id="html_8eb739a9e6525bfa345ffeb5bc56dad1" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>麗山高中(港墘)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 20分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 20<br>             <span style='color: #666;'><b>座標:</b></span> 25.082989, 121.578310         </div>         </div>`)[0];
+                popup_8d7a5ea2498769983cbe45bb0288d35b.setContent(html_8eb739a9e6525bfa345ffeb5bc56dad1);
+            
+        
+
+        marker_487ce23ba1d5b9601178f82c8df406d3.bindPopup(popup_8d7a5ea2498769983cbe45bb0288d35b)
+        ;
+
+        
+    
+    
+            marker_487ce23ba1d5b9601178f82c8df406d3.bindTooltip(
+                `<div>
+                     麗山高中(港墘) - 20分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_487ce23ba1d5b9601178f82c8df406d3.setIcon(icon_b240b40c9e92170555403032680159c4);
+            
+    
+            var marker_12f852fe0f2692af1133d8784f37f03f = L.marker(
+                [25.084215, 121.5767705],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_11c6a8cb16f6afe3dd1a6116228b7e37 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_341beeaf630c8154dfce306ff8f4463e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a135a11bd47155673323d8f573757460 = $(`<div id="html_a135a11bd47155673323d8f573757460" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>麗山高中(環山)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 21<br>             <span style='color: #666;'><b>座標:</b></span> 25.084215, 121.576770         </div>         </div>`)[0];
+                popup_341beeaf630c8154dfce306ff8f4463e.setContent(html_a135a11bd47155673323d8f573757460);
+            
+        
+
+        marker_12f852fe0f2692af1133d8784f37f03f.bindPopup(popup_341beeaf630c8154dfce306ff8f4463e)
+        ;
+
+        
+    
+    
+            marker_12f852fe0f2692af1133d8784f37f03f.bindTooltip(
+                `<div>
+                     麗山高中(環山) - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_12f852fe0f2692af1133d8784f37f03f.setIcon(icon_11c6a8cb16f6afe3dd1a6116228b7e37);
+            
+    
+            var marker_ac657384fc5dcdb52ae920ada3e819d4 = L.marker(
+                [25.085224, 121.5742675],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_df4ec4b0fe14632cfd2cf8cf1ca2e509 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8a83ce3e2128d10ab1d1b7950c78f8d2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_81ac090237e1d1cfdb7aa185f006936a = $(`<div id="html_81ac090237e1d1cfdb7aa185f006936a" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>麗山新村</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 22<br>             <span style='color: #666;'><b>座標:</b></span> 25.085224, 121.574268         </div>         </div>`)[0];
+                popup_8a83ce3e2128d10ab1d1b7950c78f8d2.setContent(html_81ac090237e1d1cfdb7aa185f006936a);
+            
+        
+
+        marker_ac657384fc5dcdb52ae920ada3e819d4.bindPopup(popup_8a83ce3e2128d10ab1d1b7950c78f8d2)
+        ;
+
+        
+    
+    
+            marker_ac657384fc5dcdb52ae920ada3e819d4.bindTooltip(
+                `<div>
+                     麗山新村 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ac657384fc5dcdb52ae920ada3e819d4.setIcon(icon_df4ec4b0fe14632cfd2cf8cf1ca2e509);
+            
+    
+            var marker_28cfc4958a10620aacc3bea691239cf5 = L.marker(
+                [25.086361, 121.5713602],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_a810dc16a4af7599e9a558877a066c49 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_396f3efd5993b032ba69860345a69e64 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_631a619c924fcdf844cce3c03131ccfe = $(`<div id="html_631a619c924fcdf844cce3c03131ccfe" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>環山路</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 16分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 23<br>             <span style='color: #666;'><b>座標:</b></span> 25.086361, 121.571360         </div>         </div>`)[0];
+                popup_396f3efd5993b032ba69860345a69e64.setContent(html_631a619c924fcdf844cce3c03131ccfe);
+            
+        
+
+        marker_28cfc4958a10620aacc3bea691239cf5.bindPopup(popup_396f3efd5993b032ba69860345a69e64)
+        ;
+
+        
+    
+    
+            marker_28cfc4958a10620aacc3bea691239cf5.bindTooltip(
+                `<div>
+                     環山路 - 16分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_28cfc4958a10620aacc3bea691239cf5.setIcon(icon_a810dc16a4af7599e9a558877a066c49);
+            
+    
+            var marker_4aec2df372204d440365b56a7bc73000 = L.marker(
+                [25.086482, 121.5675277],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_ceb58e001a4c0cd27e02949266d3142a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f9411d81a5fd9d6c61dfb52145d83f0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7825f108bb4d34810d879ba7f282fd5e = $(`<div id="html_7825f108bb4d34810d879ba7f282fd5e" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>德明財經科技大學(環山)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 24<br>             <span style='color: #666;'><b>座標:</b></span> 25.086482, 121.567528         </div>         </div>`)[0];
+                popup_9f9411d81a5fd9d6c61dfb52145d83f0.setContent(html_7825f108bb4d34810d879ba7f282fd5e);
+            
+        
+
+        marker_4aec2df372204d440365b56a7bc73000.bindPopup(popup_9f9411d81a5fd9d6c61dfb52145d83f0)
+        ;
+
+        
+    
+    
+            marker_4aec2df372204d440365b56a7bc73000.bindTooltip(
+                `<div>
+                     德明財經科技大學(環山) - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4aec2df372204d440365b56a7bc73000.setIcon(icon_ceb58e001a4c0cd27e02949266d3142a);
+            
+    
+            var marker_9f32203e31e7870373013072a691a548 = L.marker(
+                [25.08514, 121.56545],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_b4daff2cd249b1c15d5e218025944345 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2c01db2654372fbc73d1d4986ca72f49 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_32ad5d335b7ef11e956b9f386e8c6916 = $(`<div id="html_32ad5d335b7ef11e956b9f386e8c6916" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>西湖國中</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 18分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 25<br>             <span style='color: #666;'><b>座標:</b></span> 25.085140, 121.565450         </div>         </div>`)[0];
+                popup_2c01db2654372fbc73d1d4986ca72f49.setContent(html_32ad5d335b7ef11e956b9f386e8c6916);
+            
+        
+
+        marker_9f32203e31e7870373013072a691a548.bindPopup(popup_2c01db2654372fbc73d1d4986ca72f49)
+        ;
+
+        
+    
+    
+            marker_9f32203e31e7870373013072a691a548.bindTooltip(
+                `<div>
+                     西湖國中 - 18分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9f32203e31e7870373013072a691a548.setIcon(icon_b4daff2cd249b1c15d5e218025944345);
+            
+    
+            var marker_1632cea70dae220b1a1195c4c86c643b = L.marker(
+                [25.083069, 121.5640985],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_cf7548f5534eb74dc05e89ada61773cd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_585870d98407d81a2f256ece7405af40 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_518fa7db86d147c58d8369d116ff04ff = $(`<div id="html_518fa7db86d147c58d8369d116ff04ff" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>治磐新村</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 26<br>             <span style='color: #666;'><b>座標:</b></span> 25.083069, 121.564099         </div>         </div>`)[0];
+                popup_585870d98407d81a2f256ece7405af40.setContent(html_518fa7db86d147c58d8369d116ff04ff);
+            
+        
+
+        marker_1632cea70dae220b1a1195c4c86c643b.bindPopup(popup_585870d98407d81a2f256ece7405af40)
+        ;
+
+        
+    
+    
+            marker_1632cea70dae220b1a1195c4c86c643b.bindTooltip(
+                `<div>
+                     治磐新村 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1632cea70dae220b1a1195c4c86c643b.setIcon(icon_cf7548f5534eb74dc05e89ada61773cd);
+            
+    
+            var marker_f708c5d40f1b64a32e4e55d4f9e53531 = L.marker(
+                [25.084381, 121.5615357],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_1329ac573ea3ea9f27cd23749921eb7c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bab00e175035fbb032506d39edc6f8ab = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5e1a308d196cebd4544abf9706e7e7e6 = $(`<div id="html_5e1a308d196cebd4544abf9706e7e7e6" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>文湖國小</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 27<br>             <span style='color: #666;'><b>座標:</b></span> 25.084381, 121.561536         </div>         </div>`)[0];
+                popup_bab00e175035fbb032506d39edc6f8ab.setContent(html_5e1a308d196cebd4544abf9706e7e7e6);
+            
+        
+
+        marker_f708c5d40f1b64a32e4e55d4f9e53531.bindPopup(popup_bab00e175035fbb032506d39edc6f8ab)
+        ;
+
+        
+    
+    
+            marker_f708c5d40f1b64a32e4e55d4f9e53531.bindTooltip(
+                `<div>
+                     文湖國小 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f708c5d40f1b64a32e4e55d4f9e53531.setIcon(icon_1329ac573ea3ea9f27cd23749921eb7c);
+            
+    
+            var marker_1cb80baf24b39b1c2d122c384b79c823 = L.marker(
+                [25.084817, 121.5581193],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_fadd154844a50ca072db2c83e9941dac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8f9ffb9d983214ad0386e4313f153095 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_27d3b74c23703ee9e58b2c49d522a361 = $(`<div id="html_27d3b74c23703ee9e58b2c49d522a361" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>美麗華</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 28<br>             <span style='color: #666;'><b>座標:</b></span> 25.084817, 121.558119         </div>         </div>`)[0];
+                popup_8f9ffb9d983214ad0386e4313f153095.setContent(html_27d3b74c23703ee9e58b2c49d522a361);
+            
+        
+
+        marker_1cb80baf24b39b1c2d122c384b79c823.bindPopup(popup_8f9ffb9d983214ad0386e4313f153095)
+        ;
+
+        
+    
+    
+            marker_1cb80baf24b39b1c2d122c384b79c823.bindTooltip(
+                `<div>
+                     美麗華 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1cb80baf24b39b1c2d122c384b79c823.setIcon(icon_fadd154844a50ca072db2c83e9941dac);
+            
+    
+            var marker_ded1421d8cef0bac50a07a47b0784c30 = L.marker(
+                [25.081855, 121.5584464],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_f0bc529b4ab279cb55c4535ec4314fe6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fbd9baa7fc3e37c9bed7949893d01998 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5217431390741dc53d5b9bc773aa2e0f = $(`<div id="html_5217431390741dc53d5b9bc773aa2e0f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>敬業四路</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 29<br>             <span style='color: #666;'><b>座標:</b></span> 25.081855, 121.558446         </div>         </div>`)[0];
+                popup_fbd9baa7fc3e37c9bed7949893d01998.setContent(html_5217431390741dc53d5b9bc773aa2e0f);
+            
+        
+
+        marker_ded1421d8cef0bac50a07a47b0784c30.bindPopup(popup_fbd9baa7fc3e37c9bed7949893d01998)
+        ;
+
+        
+    
+    
+            marker_ded1421d8cef0bac50a07a47b0784c30.bindTooltip(
+                `<div>
+                     敬業四路 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ded1421d8cef0bac50a07a47b0784c30.setIcon(icon_f0bc529b4ab279cb55c4535ec4314fe6);
+            
+    
+            var marker_72b04a4cc9ec8c4a14ab9f51b45beef4 = L.marker(
+                [25.08002, 121.5574829],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_2c3ef380eef4af47318060711d48be51 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2f4061b4a39a0757b862d224f8abe4c0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f2bc3a3402ccefcaf77a7f0c412be36c = $(`<div id="html_f2bc3a3402ccefcaf77a7f0c412be36c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>大直美堤花園二</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 30<br>             <span style='color: #666;'><b>座標:</b></span> 25.080020, 121.557483         </div>         </div>`)[0];
+                popup_2f4061b4a39a0757b862d224f8abe4c0.setContent(html_f2bc3a3402ccefcaf77a7f0c412be36c);
+            
+        
+
+        marker_72b04a4cc9ec8c4a14ab9f51b45beef4.bindPopup(popup_2f4061b4a39a0757b862d224f8abe4c0)
+        ;
+
+        
+    
+    
+            marker_72b04a4cc9ec8c4a14ab9f51b45beef4.bindTooltip(
+                `<div>
+                     大直美堤花園二 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_72b04a4cc9ec8c4a14ab9f51b45beef4.setIcon(icon_2c3ef380eef4af47318060711d48be51);
+            
+    
+            var marker_12f0637aca9f12a19e5dc2ebc9b63863 = L.marker(
+                [25.081338, 121.556408],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_1a7d97dde18969823a47a49c48b91557 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5be5d8ddd743e1ba5feb6b7d02481eb6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ff1b5ee4a54dafd7107c25af9a49663e = $(`<div id="html_ff1b5ee4a54dafd7107c25af9a49663e" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>敬業三路二</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 31<br>             <span style='color: #666;'><b>座標:</b></span> 25.081338, 121.556408         </div>         </div>`)[0];
+                popup_5be5d8ddd743e1ba5feb6b7d02481eb6.setContent(html_ff1b5ee4a54dafd7107c25af9a49663e);
+            
+        
+
+        marker_12f0637aca9f12a19e5dc2ebc9b63863.bindPopup(popup_5be5d8ddd743e1ba5feb6b7d02481eb6)
+        ;
+
+        
+    
+    
+            marker_12f0637aca9f12a19e5dc2ebc9b63863.bindTooltip(
+                `<div>
+                     敬業三路二 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_12f0637aca9f12a19e5dc2ebc9b63863.setIcon(icon_1a7d97dde18969823a47a49c48b91557);
+            
+    
+            var marker_fdea9348489f722c5f5e5dfac668bf5e = L.marker(
+                [25.083024, 121.556223],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_5ef76e22de87a09c218553f8191ae636 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8f9e66261b57780f2bf6453ae4004268 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bf31b65f291e2cea968a1362418c80b7 = $(`<div id="html_bf31b65f291e2cea968a1362418c80b7" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>敬業三路一</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 32<br>             <span style='color: #666;'><b>座標:</b></span> 25.083024, 121.556223         </div>         </div>`)[0];
+                popup_8f9e66261b57780f2bf6453ae4004268.setContent(html_bf31b65f291e2cea968a1362418c80b7);
+            
+        
+
+        marker_fdea9348489f722c5f5e5dfac668bf5e.bindPopup(popup_8f9e66261b57780f2bf6453ae4004268)
+        ;
+
+        
+    
+    
+            marker_fdea9348489f722c5f5e5dfac668bf5e.bindTooltip(
+                `<div>
+                     敬業三路一 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fdea9348489f722c5f5e5dfac668bf5e.setIcon(icon_5ef76e22de87a09c218553f8191ae636);
+            
+    
+            var marker_d9556b1eecfca18cc45259ee90827981 = L.marker(
+                [25.081246, 121.5562232],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_9ec89bc1b6302fbca261336c66742eb7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3be679c10557afd61e9219833ede5b39 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_06b2df4d1687afeba50b00ee8500d6ea = $(`<div id="html_06b2df4d1687afeba50b00ee8500d6ea" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>敬業三路二</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 33<br>             <span style='color: #666;'><b>座標:</b></span> 25.081246, 121.556223         </div>         </div>`)[0];
+                popup_3be679c10557afd61e9219833ede5b39.setContent(html_06b2df4d1687afeba50b00ee8500d6ea);
+            
+        
+
+        marker_d9556b1eecfca18cc45259ee90827981.bindPopup(popup_3be679c10557afd61e9219833ede5b39)
+        ;
+
+        
+    
+    
+            marker_d9556b1eecfca18cc45259ee90827981.bindTooltip(
+                `<div>
+                     敬業三路二 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d9556b1eecfca18cc45259ee90827981.setIcon(icon_9ec89bc1b6302fbca261336c66742eb7);
+            
+    
+            var marker_0bcf061ca391ee5572bdff4d5013b898 = L.marker(
+                [25.079873, 121.5566492],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_17674b43d8c8eceadeb7c8618397244e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_44543d52b8a69635117bdaf35516fc57 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5294d0911b9cf0acd51ceccddeff18ae = $(`<div id="html_5294d0911b9cf0acd51ceccddeff18ae" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>大直美堤花園三</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 22分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 34<br>             <span style='color: #666;'><b>座標:</b></span> 25.079873, 121.556649         </div>         </div>`)[0];
+                popup_44543d52b8a69635117bdaf35516fc57.setContent(html_5294d0911b9cf0acd51ceccddeff18ae);
+            
+        
+
+        marker_0bcf061ca391ee5572bdff4d5013b898.bindPopup(popup_44543d52b8a69635117bdaf35516fc57)
+        ;
+
+        
+    
+    
+            marker_0bcf061ca391ee5572bdff4d5013b898.bindTooltip(
+                `<div>
+                     大直美堤花園三 - 22分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0bcf061ca391ee5572bdff4d5013b898.setIcon(icon_17674b43d8c8eceadeb7c8618397244e);
+            
+    
+            var marker_21a4e2f7a26a59bed2b04b97365dcbf9 = L.marker(
+                [25.081142, 121.558531],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_f9051857f47f13db1407c69c29edc4ca = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b167a94bedace1d9ad6ce4c6cb8ff32f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_054814be8d63459d7416dc9059e72053 = $(`<div id="html_054814be8d63459d7416dc9059e72053" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>敬業四路</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 35<br>             <span style='color: #666;'><b>座標:</b></span> 25.081142, 121.558531         </div>         </div>`)[0];
+                popup_b167a94bedace1d9ad6ce4c6cb8ff32f.setContent(html_054814be8d63459d7416dc9059e72053);
+            
+        
+
+        marker_21a4e2f7a26a59bed2b04b97365dcbf9.bindPopup(popup_b167a94bedace1d9ad6ce4c6cb8ff32f)
+        ;
+
+        
+    
+    
+            marker_21a4e2f7a26a59bed2b04b97365dcbf9.bindTooltip(
+                `<div>
+                     敬業四路 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_21a4e2f7a26a59bed2b04b97365dcbf9.setIcon(icon_f9051857f47f13db1407c69c29edc4ca);
+            
+    
+            var marker_8c945d80972bd71083821bb8583af65a = L.marker(
+                [25.084538, 121.5581969],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_711f9a3e4e416ba96ee3364c423430d3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f4573abf6959014635929a0d75141d31 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f4d23ca1ce86488fd55df2a43b4ef686 = $(`<div id="html_f4d23ca1ce86488fd55df2a43b4ef686" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>美麗華</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 36<br>             <span style='color: #666;'><b>座標:</b></span> 25.084538, 121.558197         </div>         </div>`)[0];
+                popup_f4573abf6959014635929a0d75141d31.setContent(html_f4d23ca1ce86488fd55df2a43b4ef686);
+            
+        
+
+        marker_8c945d80972bd71083821bb8583af65a.bindPopup(popup_f4573abf6959014635929a0d75141d31)
+        ;
+
+        
+    
+    
+            marker_8c945d80972bd71083821bb8583af65a.bindTooltip(
+                `<div>
+                     美麗華 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8c945d80972bd71083821bb8583af65a.setIcon(icon_711f9a3e4e416ba96ee3364c423430d3);
+            
+    
+            var marker_4a3b322ac3112cd5c6f0beee644e055a = L.marker(
+                [25.084151, 121.5615165],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_c773487c8aa1a3b9ec01e53f9e563b8e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_32f0721ae674a8f3c4b606bd174a5055 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ac570c93bc1b1889ab010168a80b01e7 = $(`<div id="html_ac570c93bc1b1889ab010168a80b01e7" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>文湖國小</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 37<br>             <span style='color: #666;'><b>座標:</b></span> 25.084151, 121.561516         </div>         </div>`)[0];
+                popup_32f0721ae674a8f3c4b606bd174a5055.setContent(html_ac570c93bc1b1889ab010168a80b01e7);
+            
+        
+
+        marker_4a3b322ac3112cd5c6f0beee644e055a.bindPopup(popup_32f0721ae674a8f3c4b606bd174a5055)
+        ;
+
+        
+    
+    
+            marker_4a3b322ac3112cd5c6f0beee644e055a.bindTooltip(
+                `<div>
+                     文湖國小 - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4a3b322ac3112cd5c6f0beee644e055a.setIcon(icon_c773487c8aa1a3b9ec01e53f9e563b8e);
+            
+    
+            var marker_0409428b2456994260c8d1b8fd6ac1d7 = L.marker(
+                [25.082945, 121.5638416],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_1c66339c6853c19f747498e268c3c50d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aa4847a9d962164249f645a71eaadf0a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3b848cfa27ba0ef3aa2186dbeebd3721 = $(`<div id="html_3b848cfa27ba0ef3aa2186dbeebd3721" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>治磐新村</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 38<br>             <span style='color: #666;'><b>座標:</b></span> 25.082945, 121.563842         </div>         </div>`)[0];
+                popup_aa4847a9d962164249f645a71eaadf0a.setContent(html_3b848cfa27ba0ef3aa2186dbeebd3721);
+            
+        
+
+        marker_0409428b2456994260c8d1b8fd6ac1d7.bindPopup(popup_aa4847a9d962164249f645a71eaadf0a)
+        ;
+
+        
+    
+    
+            marker_0409428b2456994260c8d1b8fd6ac1d7.bindTooltip(
+                `<div>
+                     治磐新村 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0409428b2456994260c8d1b8fd6ac1d7.setIcon(icon_1c66339c6853c19f747498e268c3c50d);
+            
+    
+            var marker_3adc36d95426c8f42f7e53c7df853155 = L.marker(
+                [25.085622, 121.5656019],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_88938ee65f09c22b83b12cf8b7563fe1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3c435b522df43cacd100eb674bbccd7e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_722194a28018986cf9eaa18a9788c2f9 = $(`<div id="html_722194a28018986cf9eaa18a9788c2f9" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>西湖國中</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 18分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 39<br>             <span style='color: #666;'><b>座標:</b></span> 25.085622, 121.565602         </div>         </div>`)[0];
+                popup_3c435b522df43cacd100eb674bbccd7e.setContent(html_722194a28018986cf9eaa18a9788c2f9);
+            
+        
+
+        marker_3adc36d95426c8f42f7e53c7df853155.bindPopup(popup_3c435b522df43cacd100eb674bbccd7e)
+        ;
+
+        
+    
+    
+            marker_3adc36d95426c8f42f7e53c7df853155.bindTooltip(
+                `<div>
+                     西湖國中 - 18分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3adc36d95426c8f42f7e53c7df853155.setIcon(icon_88938ee65f09c22b83b12cf8b7563fe1);
+            
+    
+            var marker_1a53dfece00669e125d95bc21c291530 = L.marker(
+                [25.086349, 121.5682175],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_d1a2d18767c4f3728c7300b408327402 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_61e1cc52624503b290141b495985462e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_74534a350c50f286e4322954f43e0ac3 = $(`<div id="html_74534a350c50f286e4322954f43e0ac3" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>德明財經科技大學(環山)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 40<br>             <span style='color: #666;'><b>座標:</b></span> 25.086349, 121.568218         </div>         </div>`)[0];
+                popup_61e1cc52624503b290141b495985462e.setContent(html_74534a350c50f286e4322954f43e0ac3);
+            
+        
+
+        marker_1a53dfece00669e125d95bc21c291530.bindPopup(popup_61e1cc52624503b290141b495985462e)
+        ;
+
+        
+    
+    
+            marker_1a53dfece00669e125d95bc21c291530.bindTooltip(
+                `<div>
+                     德明財經科技大學(環山) - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1a53dfece00669e125d95bc21c291530.setIcon(icon_d1a2d18767c4f3728c7300b408327402);
+            
+    
+            var marker_decda575f0c129ca4fa70fb39cd26741 = L.marker(
+                [25.08579, 121.57246],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_e591e3905f9a87f9f75a7355a57b35af = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a8fd8245e1ee575e07a460c61feb0e6d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_04b20fbda611f6b7d482fefb02b8a1f4 = $(`<div id="html_04b20fbda611f6b7d482fefb02b8a1f4" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>環山路</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 16分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 41<br>             <span style='color: #666;'><b>座標:</b></span> 25.085790, 121.572460         </div>         </div>`)[0];
+                popup_a8fd8245e1ee575e07a460c61feb0e6d.setContent(html_04b20fbda611f6b7d482fefb02b8a1f4);
+            
+        
+
+        marker_decda575f0c129ca4fa70fb39cd26741.bindPopup(popup_a8fd8245e1ee575e07a460c61feb0e6d)
+        ;
+
+        
+    
+    
+            marker_decda575f0c129ca4fa70fb39cd26741.bindTooltip(
+                `<div>
+                     環山路 - 16分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_decda575f0c129ca4fa70fb39cd26741.setIcon(icon_e591e3905f9a87f9f75a7355a57b35af);
+            
+    
+            var marker_f512d857bcdf30f586637e507d05c522 = L.marker(
+                [25.085184, 121.5739432],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_75b3fbe2f5540e2810175b4f73f741f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4eef39a29b27eadb899bddccadbc920b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a32e50610102173e59a75712995e4fea = $(`<div id="html_a32e50610102173e59a75712995e4fea" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>麗山新村</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 42<br>             <span style='color: #666;'><b>座標:</b></span> 25.085184, 121.573943         </div>         </div>`)[0];
+                popup_4eef39a29b27eadb899bddccadbc920b.setContent(html_a32e50610102173e59a75712995e4fea);
+            
+        
+
+        marker_f512d857bcdf30f586637e507d05c522.bindPopup(popup_4eef39a29b27eadb899bddccadbc920b)
+        ;
+
+        
+    
+    
+            marker_f512d857bcdf30f586637e507d05c522.bindTooltip(
+                `<div>
+                     麗山新村 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f512d857bcdf30f586637e507d05c522.setIcon(icon_75b3fbe2f5540e2810175b4f73f741f3);
+            
+    
+            var marker_462ced6bccead4070e20dac4d22efc59 = L.marker(
+                [25.084057, 121.5768304],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_bdf853877dc8c59328abe18407f12cb3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c3ba735f1c9cd5410ce86a527348be99 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d48edd4a6532212b1fb79d0ed4318f80 = $(`<div id="html_d48edd4a6532212b1fb79d0ed4318f80" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>麗山高中(環山)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 43<br>             <span style='color: #666;'><b>座標:</b></span> 25.084057, 121.576830         </div>         </div>`)[0];
+                popup_c3ba735f1c9cd5410ce86a527348be99.setContent(html_d48edd4a6532212b1fb79d0ed4318f80);
+            
+        
+
+        marker_462ced6bccead4070e20dac4d22efc59.bindPopup(popup_c3ba735f1c9cd5410ce86a527348be99)
+        ;
+
+        
+    
+    
+            marker_462ced6bccead4070e20dac4d22efc59.bindTooltip(
+                `<div>
+                     麗山高中(環山) - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_462ced6bccead4070e20dac4d22efc59.setIcon(icon_bdf853877dc8c59328abe18407f12cb3);
+            
+    
+            var marker_10c63628d9f2e9f6e0d3a4c61686b4b3 = L.marker(
+                [25.08352, 121.57808],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_97b510ea11eb80b3c937406863ac7092 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_151f6ea3ec8d1c3a0a6e60dec6549748 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_dfe0ec69db68914adf11331b1b49b899 = $(`<div id="html_dfe0ec69db68914adf11331b1b49b899" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>麗山高中(港墘)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 20分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 44<br>             <span style='color: #666;'><b>座標:</b></span> 25.083520, 121.578080         </div>         </div>`)[0];
+                popup_151f6ea3ec8d1c3a0a6e60dec6549748.setContent(html_dfe0ec69db68914adf11331b1b49b899);
+            
+        
+
+        marker_10c63628d9f2e9f6e0d3a4c61686b4b3.bindPopup(popup_151f6ea3ec8d1c3a0a6e60dec6549748)
+        ;
+
+        
+    
+    
+            marker_10c63628d9f2e9f6e0d3a4c61686b4b3.bindTooltip(
+                `<div>
+                     麗山高中(港墘) - 20分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_10c63628d9f2e9f6e0d3a4c61686b4b3.setIcon(icon_97b510ea11eb80b3c937406863ac7092);
+            
+    
+            var marker_4df0e019cfd63f6f58622f5cec7b33a6 = L.marker(
+                [25.080557, 121.5775386],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_8375f264038409b787113a79ae5224b8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_66c76feb2d5fbd1806c8ce9b7a7da62e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_67511c6ddc7ce7c404e72b722827f6a7 = $(`<div id="html_67511c6ddc7ce7c404e72b722827f6a7" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>港墘</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 12分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 45<br>             <span style='color: #666;'><b>座標:</b></span> 25.080557, 121.577539         </div>         </div>`)[0];
+                popup_66c76feb2d5fbd1806c8ce9b7a7da62e.setContent(html_67511c6ddc7ce7c404e72b722827f6a7);
+            
+        
+
+        marker_4df0e019cfd63f6f58622f5cec7b33a6.bindPopup(popup_66c76feb2d5fbd1806c8ce9b7a7da62e)
+        ;
+
+        
+    
+    
+            marker_4df0e019cfd63f6f58622f5cec7b33a6.bindTooltip(
+                `<div>
+                     港墘 - 12分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4df0e019cfd63f6f58622f5cec7b33a6.setIcon(icon_8375f264038409b787113a79ae5224b8);
+            
+    
+            var marker_1eb756e5fecfc7b7021c35e594757be4 = L.marker(
+                [25.078723, 121.5785305],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_0f9356981d111053c95f710df5d99cba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8a33ae73149758f96afdb6f8a9e1ec4e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5b5e9d67ffa2c5b5f2a262020cb5d24d = $(`<div id="html_5b5e9d67ffa2c5b5f2a262020cb5d24d" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>西湖圖書館(湖光教會)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 46<br>             <span style='color: #666;'><b>座標:</b></span> 25.078723, 121.578530         </div>         </div>`)[0];
+                popup_8a33ae73149758f96afdb6f8a9e1ec4e.setContent(html_5b5e9d67ffa2c5b5f2a262020cb5d24d);
+            
+        
+
+        marker_1eb756e5fecfc7b7021c35e594757be4.bindPopup(popup_8a33ae73149758f96afdb6f8a9e1ec4e)
+        ;
+
+        
+    
+    
+            marker_1eb756e5fecfc7b7021c35e594757be4.bindTooltip(
+                `<div>
+                     西湖圖書館(湖光教會) - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1eb756e5fecfc7b7021c35e594757be4.setIcon(icon_0f9356981d111053c95f710df5d99cba);
+            
+    
+            var marker_538581f088cc3ce0c3368fb7fe9b9d05 = L.marker(
+                [25.078356, 121.5815972],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_6b4bbbfd05f85380409523a8c00b0ebc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bb215171ce1eeb5cbc897be123726b02 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_004bc7c007a7c28f67432d361be8e6f8 = $(`<div id="html_004bc7c007a7c28f67432d361be8e6f8" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>湖光國宅</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 23分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 47<br>             <span style='color: #666;'><b>座標:</b></span> 25.078356, 121.581597         </div>         </div>`)[0];
+                popup_bb215171ce1eeb5cbc897be123726b02.setContent(html_004bc7c007a7c28f67432d361be8e6f8);
+            
+        
+
+        marker_538581f088cc3ce0c3368fb7fe9b9d05.bindPopup(popup_bb215171ce1eeb5cbc897be123726b02)
+        ;
+
+        
+    
+    
+            marker_538581f088cc3ce0c3368fb7fe9b9d05.bindTooltip(
+                `<div>
+                     湖光國宅 - 23分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_538581f088cc3ce0c3368fb7fe9b9d05.setIcon(icon_6b4bbbfd05f85380409523a8c00b0ebc);
+            
+    
+            var marker_31b67cb27aa0d625d9c1543fe996cd94 = L.marker(
+                [25.078401, 121.5841327],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_766c0e11d4880edb8b42d44829936514 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_26207b61ed442bfaaba7b3363d578cd6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cf727f15c0a526b4f3a13c0b8922ea93 = $(`<div id="html_cf727f15c0a526b4f3a13c0b8922ea93" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>捷運文德站(碧湖公園)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 3分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 48<br>             <span style='color: #666;'><b>座標:</b></span> 25.078401, 121.584133         </div>         </div>`)[0];
+                popup_26207b61ed442bfaaba7b3363d578cd6.setContent(html_cf727f15c0a526b4f3a13c0b8922ea93);
+            
+        
+
+        marker_31b67cb27aa0d625d9c1543fe996cd94.bindPopup(popup_26207b61ed442bfaaba7b3363d578cd6)
+        ;
+
+        
+    
+    
+            marker_31b67cb27aa0d625d9c1543fe996cd94.bindTooltip(
+                `<div>
+                     捷運文德站(碧湖公園) - 3分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_31b67cb27aa0d625d9c1543fe996cd94.setIcon(icon_766c0e11d4880edb8b42d44829936514);
+            
+    
+            var marker_bb63fc1e7ac7f48d00faa914db337b90 = L.marker(
+                [25.078703, 121.5875658],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_ae155d45437b7248e4d365218e01ee05 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_53921694b21ae192539dc95431620bd7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_09350ec8494137632e0df6df8cb415bd = $(`<div id="html_09350ec8494137632e0df6df8cb415bd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>內湖高中</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 49<br>             <span style='color: #666;'><b>座標:</b></span> 25.078703, 121.587566         </div>         </div>`)[0];
+                popup_53921694b21ae192539dc95431620bd7.setContent(html_09350ec8494137632e0df6df8cb415bd);
+            
+        
+
+        marker_bb63fc1e7ac7f48d00faa914db337b90.bindPopup(popup_53921694b21ae192539dc95431620bd7)
+        ;
+
+        
+    
+    
+            marker_bb63fc1e7ac7f48d00faa914db337b90.bindTooltip(
+                `<div>
+                     內湖高中 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bb63fc1e7ac7f48d00faa914db337b90.setIcon(icon_ae155d45437b7248e4d365218e01ee05);
+            
+    
+            var marker_ce9dd1679148cd1ad50635ab53000e8c = L.marker(
+                [25.076435, 121.5900771],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_1d377e1b90aaedcd3ca0dba4eb337911 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eabdc88303cc9ed10b3439936aabf1b4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_83fb1c226e1739ae8718acf27f98da1a = $(`<div id="html_83fb1c226e1739ae8718acf27f98da1a" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>方濟中學</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 50<br>             <span style='color: #666;'><b>座標:</b></span> 25.076435, 121.590077         </div>         </div>`)[0];
+                popup_eabdc88303cc9ed10b3439936aabf1b4.setContent(html_83fb1c226e1739ae8718acf27f98da1a);
+            
+        
+
+        marker_ce9dd1679148cd1ad50635ab53000e8c.bindPopup(popup_eabdc88303cc9ed10b3439936aabf1b4)
+        ;
+
+        
+    
+    
+            marker_ce9dd1679148cd1ad50635ab53000e8c.bindTooltip(
+                `<div>
+                     方濟中學 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ce9dd1679148cd1ad50635ab53000e8c.setIcon(icon_1d377e1b90aaedcd3ca0dba4eb337911);
+            
+    
+            var marker_0bc572d3e9bacd377929c274552dead3 = L.marker(
+                [25.073372, 121.58972],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_fdb1fdbcede0c74f1ed9909c946c0d0f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bfb0bb2a3643bba608c1a258c701bf81 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d6591aef491b9e3a02bfe689a587c83e = $(`<div id="html_d6591aef491b9e3a02bfe689a587c83e" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>將軍嶺</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 22分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 51<br>             <span style='color: #666;'><b>座標:</b></span> 25.073372, 121.589720         </div>         </div>`)[0];
+                popup_bfb0bb2a3643bba608c1a258c701bf81.setContent(html_d6591aef491b9e3a02bfe689a587c83e);
+            
+        
+
+        marker_0bc572d3e9bacd377929c274552dead3.bindPopup(popup_bfb0bb2a3643bba608c1a258c701bf81)
+        ;
+
+        
+    
+    
+            marker_0bc572d3e9bacd377929c274552dead3.bindTooltip(
+                `<div>
+                     將軍嶺 - 22分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0bc572d3e9bacd377929c274552dead3.setIcon(icon_fdb1fdbcede0c74f1ed9909c946c0d0f);
+            
+    
+            var marker_c44a372f88f3f0b1efbe1e8875d17f55 = L.marker(
+                [25.071852, 121.592095],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_afcea986d15cab5576fc289bc1d844c9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4ab4590cc0184cdcde457c298ce16ecf = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8c45a0e9dd5a4d203bd63c07127d2636 = $(`<div id="html_8c45a0e9dd5a4d203bd63c07127d2636" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>三總內湖站</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 52<br>             <span style='color: #666;'><b>座標:</b></span> 25.071852, 121.592095         </div>         </div>`)[0];
+                popup_4ab4590cc0184cdcde457c298ce16ecf.setContent(html_8c45a0e9dd5a4d203bd63c07127d2636);
+            
+        
+
+        marker_c44a372f88f3f0b1efbe1e8875d17f55.bindPopup(popup_4ab4590cc0184cdcde457c298ce16ecf)
+        ;
+
+        
+    
+    
+            marker_c44a372f88f3f0b1efbe1e8875d17f55.bindTooltip(
+                `<div>
+                     三總內湖站 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c44a372f88f3f0b1efbe1e8875d17f55.setIcon(icon_afcea986d15cab5576fc289bc1d844c9);
+            
+    
+            var marker_aca88d70c5ece0299983cb06900646ca = L.marker(
+                [25.071037, 121.5898699],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_158a5e43fa2fdb3ed842452eed2a3f84 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_70b666b1f3bce4c9ca029263bf6557cb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_98a1b9ef607f8a0e4e000915af9138b3 = $(`<div id="html_98a1b9ef607f8a0e4e000915af9138b3" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>國防醫學中心</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 53<br>             <span style='color: #666;'><b>座標:</b></span> 25.071037, 121.589870         </div>         </div>`)[0];
+                popup_70b666b1f3bce4c9ca029263bf6557cb.setContent(html_98a1b9ef607f8a0e4e000915af9138b3);
+            
+        
+
+        marker_aca88d70c5ece0299983cb06900646ca.bindPopup(popup_70b666b1f3bce4c9ca029263bf6557cb)
+        ;
+
+        
+    
+    
+            marker_aca88d70c5ece0299983cb06900646ca.bindTooltip(
+                `<div>
+                     國防醫學中心 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aca88d70c5ece0299983cb06900646ca.setIcon(icon_158a5e43fa2fdb3ed842452eed2a3f84);
+            
+    
+            var marker_92e998dbade863febc90e7967fe4f3c7 = L.marker(
+                [25.06803, 121.5906611],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_4b6897baf1c7e4c62d3cb27484cd7581 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1b4fe7bde7dac9fbd30490b4ea881837 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9988a3d11cc33951ad6b5dc17b5d95b5 = $(`<div id="html_9988a3d11cc33951ad6b5dc17b5d95b5" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>湖興</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 54<br>             <span style='color: #666;'><b>座標:</b></span> 25.068030, 121.590661         </div>         </div>`)[0];
+                popup_1b4fe7bde7dac9fbd30490b4ea881837.setContent(html_9988a3d11cc33951ad6b5dc17b5d95b5);
+            
+        
+
+        marker_92e998dbade863febc90e7967fe4f3c7.bindPopup(popup_1b4fe7bde7dac9fbd30490b4ea881837)
+        ;
+
+        
+    
+    
+            marker_92e998dbade863febc90e7967fe4f3c7.bindTooltip(
+                `<div>
+                     湖興 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_92e998dbade863febc90e7967fe4f3c7.setIcon(icon_4b6897baf1c7e4c62d3cb27484cd7581);
+            
+    
+            var marker_6e0999263cc7df43e7917fdff05c5387 = L.marker(
+                [25.067, 121.5905214],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_4d2f7898c68aa4d59ef92ee8567c8703 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_96fba3caec5174a66687f0a8eb884021 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d9e4599c1c4f7e9a4251f7810c36204d = $(`<div id="html_d9e4599c1c4f7e9a4251f7810c36204d" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>上灣仔</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 55<br>             <span style='color: #666;'><b>座標:</b></span> 25.067000, 121.590521         </div>         </div>`)[0];
+                popup_96fba3caec5174a66687f0a8eb884021.setContent(html_d9e4599c1c4f7e9a4251f7810c36204d);
+            
+        
+
+        marker_6e0999263cc7df43e7917fdff05c5387.bindPopup(popup_96fba3caec5174a66687f0a8eb884021)
+        ;
+
+        
+    
+    
+            marker_6e0999263cc7df43e7917fdff05c5387.bindTooltip(
+                `<div>
+                     上灣仔 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6e0999263cc7df43e7917fdff05c5387.setIcon(icon_4d2f7898c68aa4d59ef92ee8567c8703);
+            
+    
+            var marker_ebbf7271160bebd8d955afa16b5cf301 = L.marker(
+                [25.061041, 121.591015],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_3f323d40dab9795ed622696b6ce352ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_977f500d79cef0c7b07cfc273091f876 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_310cfd9101fc1d1a8b23e8cbcf0c2fc6 = $(`<div id="html_310cfd9101fc1d1a8b23e8cbcf0c2fc6" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>石潭公園(成功)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 56<br>             <span style='color: #666;'><b>座標:</b></span> 25.061041, 121.591015         </div>         </div>`)[0];
+                popup_977f500d79cef0c7b07cfc273091f876.setContent(html_310cfd9101fc1d1a8b23e8cbcf0c2fc6);
+            
+        
+
+        marker_ebbf7271160bebd8d955afa16b5cf301.bindPopup(popup_977f500d79cef0c7b07cfc273091f876)
+        ;
+
+        
+    
+    
+            marker_ebbf7271160bebd8d955afa16b5cf301.bindTooltip(
+                `<div>
+                     石潭公園(成功) - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ebbf7271160bebd8d955afa16b5cf301.setIcon(icon_3f323d40dab9795ed622696b6ce352ef);
+            
+    
+            var marker_8abd10349e61f5f841b3398b49df9823 = L.marker(
+                [25.055748, 121.5937887],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_84011fb32ed4ddb76f1773373a7c5b9d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4c4f15941a11d64468fd16434036688b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c80fe5b7d11cf18be329c41bfe53e5ea = $(`<div id="html_c80fe5b7d11cf18be329c41bfe53e5ea" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港分局(向陽)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 即將到站<br>             <span style='color: #4682B4;'><b>站序:</b></span> 57<br>             <span style='color: #666;'><b>座標:</b></span> 25.055748, 121.593789         </div>         </div>`)[0];
+                popup_4c4f15941a11d64468fd16434036688b.setContent(html_c80fe5b7d11cf18be329c41bfe53e5ea);
+            
+        
+
+        marker_8abd10349e61f5f841b3398b49df9823.bindPopup(popup_4c4f15941a11d64468fd16434036688b)
+        ;
+
+        
+    
+    
+            marker_8abd10349e61f5f841b3398b49df9823.bindTooltip(
+                `<div>
+                     南港分局(向陽) - 即將到站
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8abd10349e61f5f841b3398b49df9823.setIcon(icon_84011fb32ed4ddb76f1773373a7c5b9d);
+            
+    
+            var marker_c88623d9a0abee1cbaf1332246b8780e = L.marker(
+                [25.053019, 121.5949802],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_c194c91ac6f35b171a1844eaf2886b13 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_66e327a9aeb952df7ace6176b7e8e91b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_afc74b2d7bca5e4f6b27c794547f7942 = $(`<div id="html_afc74b2d7bca5e4f6b27c794547f7942" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港高中</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 8分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 58<br>             <span style='color: #666;'><b>座標:</b></span> 25.053019, 121.594980         </div>         </div>`)[0];
+                popup_66e327a9aeb952df7ace6176b7e8e91b.setContent(html_afc74b2d7bca5e4f6b27c794547f7942);
+            
+        
+
+        marker_c88623d9a0abee1cbaf1332246b8780e.bindPopup(popup_66e327a9aeb952df7ace6176b7e8e91b)
+        ;
+
+        
+    
+    
+            marker_c88623d9a0abee1cbaf1332246b8780e.bindTooltip(
+                `<div>
+                     南港高中 - 8分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c88623d9a0abee1cbaf1332246b8780e.setIcon(icon_c194c91ac6f35b171a1844eaf2886b13);
+            
+    
+            var marker_9417d1b71c0123e24e9cd2e193f24593 = L.marker(
+                [25.050346, 121.593165],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_fab3dae95d0a485631ec837b7f154062 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_73dd0a51eb692d8b07eb44acb3becf74 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c7e1a3428110a0b51e69d5e43a31c371 = $(`<div id="html_c7e1a3428110a0b51e69d5e43a31c371" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>捷運昆陽站</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 59<br>             <span style='color: #666;'><b>座標:</b></span> 25.050346, 121.593165         </div>         </div>`)[0];
+                popup_73dd0a51eb692d8b07eb44acb3becf74.setContent(html_c7e1a3428110a0b51e69d5e43a31c371);
+            
+        
+
+        marker_9417d1b71c0123e24e9cd2e193f24593.bindPopup(popup_73dd0a51eb692d8b07eb44acb3becf74)
+        ;
+
+        
+    
+    
+            marker_9417d1b71c0123e24e9cd2e193f24593.bindTooltip(
+                `<div>
+                     捷運昆陽站 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9417d1b71c0123e24e9cd2e193f24593.setIcon(icon_fab3dae95d0a485631ec837b7f154062);
+            
+    
+            var marker_e8008a43624bbbc60939558da93eb803 = L.marker(
+                [25.050052, 121.59306],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_a224166b659c1521facfafb8b8ff66cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a54179618599f439852a6e7d396e3627 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_82c5b6c64587f2753441995f03cac6dd = $(`<div id="html_82c5b6c64587f2753441995f03cac6dd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>捷運昆陽站</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 暫無資訊<br>             <span style='color: #4682B4;'><b>站序:</b></span> 60<br>             <span style='color: #666;'><b>座標:</b></span> 25.050052, 121.593060         </div>         </div>`)[0];
+                popup_a54179618599f439852a6e7d396e3627.setContent(html_82c5b6c64587f2753441995f03cac6dd);
+            
+        
+
+        marker_e8008a43624bbbc60939558da93eb803.bindPopup(popup_a54179618599f439852a6e7d396e3627)
+        ;
+
+        
+    
+    
+            marker_e8008a43624bbbc60939558da93eb803.bindTooltip(
+                `<div>
+                     捷運昆陽站 - 暫無資訊
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e8008a43624bbbc60939558da93eb803.setIcon(icon_a224166b659c1521facfafb8b8ff66cc);
+            
+    
+            var marker_3e0f34aa272e83c3953f01d1ac6e0886 = L.marker(
+                [25.051694, 121.604333],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_a69a2fd229571913e6d2d504cbfae145 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7cc3a2191014891e384fd8710030254b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bcd8164db1412d74963565252ca30828 = $(`<div id="html_bcd8164db1412d74963565252ca30828" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港機廠</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 進站中<br>             <span style='color: #4682B4;'><b>站序:</b></span> 61<br>             <span style='color: #666;'><b>座標:</b></span> 25.051694, 121.604333         </div>         </div>`)[0];
+                popup_7cc3a2191014891e384fd8710030254b.setContent(html_bcd8164db1412d74963565252ca30828);
+            
+        
+
+        marker_3e0f34aa272e83c3953f01d1ac6e0886.bindPopup(popup_7cc3a2191014891e384fd8710030254b)
+        ;
+
+        
+    
+    
+            marker_3e0f34aa272e83c3953f01d1ac6e0886.bindTooltip(
+                `<div>
+                     南港機廠 - 進站中
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3e0f34aa272e83c3953f01d1ac6e0886.setIcon(icon_a69a2fd229571913e6d2d504cbfae145);
+            
+    
+            var marker_904e60de551dda9df8466bb3882b59ff = L.marker(
+                [25.053195, 121.6071781],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_7ef573006ba73b04bb83ed1df68eff4c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c3738c3083b8d9dd718b21fac6ab2b8e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_901fc8569fa327a975e9a7d1633b14a3 = $(`<div id="html_901fc8569fa327a975e9a7d1633b14a3" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港車站</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 16分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 62<br>             <span style='color: #666;'><b>座標:</b></span> 25.053195, 121.607178         </div>         </div>`)[0];
+                popup_c3738c3083b8d9dd718b21fac6ab2b8e.setContent(html_901fc8569fa327a975e9a7d1633b14a3);
+            
+        
+
+        marker_904e60de551dda9df8466bb3882b59ff.bindPopup(popup_c3738c3083b8d9dd718b21fac6ab2b8e)
+        ;
+
+        
+    
+    
+            marker_904e60de551dda9df8466bb3882b59ff.bindTooltip(
+                `<div>
+                     南港車站 - 16分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_904e60de551dda9df8466bb3882b59ff.setIcon(icon_7ef573006ba73b04bb83ed1df68eff4c);
+            
+    
+            var marker_6e59b8db00102de687fbc75551db80e7 = L.marker(
+                [25.055781, 121.607246],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_028587f2bf18c8691e5b3d42a4fa0876 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eac1a4a4256aff6510fcd02550d3cab4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b0fc2f791a6bc94973b5089e0702bcd5 = $(`<div id="html_b0fc2f791a6bc94973b5089e0702bcd5" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港高工一</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 22分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 63<br>             <span style='color: #666;'><b>座標:</b></span> 25.055781, 121.607246         </div>         </div>`)[0];
+                popup_eac1a4a4256aff6510fcd02550d3cab4.setContent(html_b0fc2f791a6bc94973b5089e0702bcd5);
+            
+        
+
+        marker_6e59b8db00102de687fbc75551db80e7.bindPopup(popup_eac1a4a4256aff6510fcd02550d3cab4)
+        ;
+
+        
+    
+    
+            marker_6e59b8db00102de687fbc75551db80e7.bindTooltip(
+                `<div>
+                     南港高工一 - 22分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6e59b8db00102de687fbc75551db80e7.setIcon(icon_028587f2bf18c8691e5b3d42a4fa0876);
+            
+    
+            var marker_c9f6fc05b24ce7a63f5b91aca4943916 = L.marker(
+                [25.058039, 121.605866],
+                {
+}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            var icon_21d9d564d0e07d6c22cf3420e83a2b44 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3fb3bd9b71ebe403ebdb485cf9b7b75a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_dc66ad9632f350237e9ebc6a9613d4d7 = $(`<div id="html_dc66ad9632f350237e9ebc6a9613d4d7" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; width: 200px;'>             <b style='font-size: 14px;'>南港高工(重陽)</b><br>             <hr style='margin: 5px 0;'>             <span style='color: #2E8B57;'><b>預估時間:</b></span> 15分<br>             <span style='color: #4682B4;'><b>站序:</b></span> 64<br>             <span style='color: #666;'><b>座標:</b></span> 25.058039, 121.605866         </div>         </div>`)[0];
+                popup_3fb3bd9b71ebe403ebdb485cf9b7b75a.setContent(html_dc66ad9632f350237e9ebc6a9613d4d7);
+            
+        
+
+        marker_c9f6fc05b24ce7a63f5b91aca4943916.bindPopup(popup_3fb3bd9b71ebe403ebdb485cf9b7b75a)
+        ;
+
+        
+    
+    
+            marker_c9f6fc05b24ce7a63f5b91aca4943916.bindTooltip(
+                `<div>
+                     南港高工(重陽) - 15分
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c9f6fc05b24ce7a63f5b91aca4943916.setIcon(icon_21d9d564d0e07d6c22cf3420e83a2b44);
+            
+    
+            var poly_line_258d33bec18638fd7fea50f0ced02f85 = L.polyline(
+                [[25.056276, 121.607046], [25.0534, 121.6069591], [25.051778, 121.602893], [25.050346, 121.593165], [25.050052, 121.59306], [25.052951, 121.5952331], [25.055334, 121.5944152], [25.061289, 121.591281], [25.066818, 121.5907148], [25.067861, 121.5908537], [25.07121, 121.5900311], [25.071852, 121.592095], [25.073809, 121.5900167], [25.076884, 121.5902313], [25.079013, 121.5883097], [25.078585, 121.584249], [25.07859, 121.58078], [25.079106, 121.5779835], [25.080919, 121.5780678], [25.082989, 121.5783099], [25.084215, 121.5767705], [25.085224, 121.5742675], [25.086361, 121.5713602], [25.086482, 121.5675277], [25.08514, 121.56545], [25.083069, 121.5640985], [25.084381, 121.5615357], [25.084817, 121.5581193], [25.081855, 121.5584464], [25.08002, 121.5574829], [25.081338, 121.556408], [25.083024, 121.556223], [25.081246, 121.5562232], [25.079873, 121.5566492], [25.081142, 121.558531], [25.084538, 121.5581969], [25.084151, 121.5615165], [25.082945, 121.5638416], [25.085622, 121.5656019], [25.086349, 121.5682175], [25.08579, 121.57246], [25.085184, 121.5739432], [25.084057, 121.5768304], [25.08352, 121.57808], [25.080557, 121.5775386], [25.078723, 121.5785305], [25.078356, 121.5815972], [25.078401, 121.5841327], [25.078703, 121.5875658], [25.076435, 121.5900771], [25.073372, 121.58972], [25.071852, 121.592095], [25.071037, 121.5898699], [25.06803, 121.5906611], [25.067, 121.5905214], [25.061041, 121.591015], [25.055748, 121.5937887], [25.053019, 121.5949802], [25.050346, 121.593165], [25.050052, 121.59306], [25.051694, 121.604333], [25.053195, 121.6071781], [25.055781, 121.607246], [25.058039, 121.605866]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_c72cf97c7846898134d1d7d3223859c3);
+        
+    
+            poly_line_258d33bec18638fd7fea50f0ced02f85.bindTooltip(
+                `<div>
+                     路線: 藍20區
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

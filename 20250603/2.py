@@ -41,7 +41,7 @@ for href, bus_name in link_data:
         # 等待站牌區出現
         wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#plMapStops .snz > span")))
 
-        time.sleep(0.5)  # 小延遲，避免動態渲染不完整
+        time.sleep(10)  # 小延遲，避免動態渲染不完整
 
         stop_spans = driver.find_elements(By.CSS_SELECTOR, "#plMapStops .snz > span")
         for span in stop_spans:
