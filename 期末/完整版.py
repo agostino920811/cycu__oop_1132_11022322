@@ -178,19 +178,8 @@ def display_bus_route_on_map(route_name, stops_data):
         # 根據預估時間設置不同的顏色
         if est_time_text in ["進站中", "即將到站"]:
             icon_color = "red"
-        elif "分" in est_time_text:
-            try:
-                minutes = int(re.search(r'(\d+)', est_time_text).group(1))
-                if minutes <= 5:
-                    icon_color = "orange"
-                elif minutes <= 15:
-                    icon_color = "blue"
-                else:
-                    icon_color = "gray"
-            except:
-                icon_color = "blue"
         else:
-            icon_color = "gray"
+            icon_color = "blue"
         
         popup_html = f"""
         <div style='font-family: Arial; width: 200px;'>
@@ -244,9 +233,6 @@ def display_bus_route_on_map(route_name, stops_data):
                 font-size:14px; padding: 10px">
     <b>圖例說明</b><br>
     🔴 進站中/即將到站<br>
-    🟠 5分鐘內<br>
-    🔵 5-15分鐘<br>
-    ⚫ 15分鐘以上/無資訊<br>
     🟢 去程路線<br>
     🟣 返程路線
     </div>
@@ -302,24 +288,6 @@ async def main():
     # 獲取所有公車路線列表
     all_bus_routes_data = await fetch_all_bus_routes()
 
-    # --- 顯示所有可讀取的路線 ---
-    if all_bus_routes_data:
-        print("\n--- 可查詢的公車路線列表 ---")
-        display_count = 20
-        if len(all_bus_routes_data) > 2 * display_count:
-            print(f"部分路線列表 (共 {len(all_bus_routes_data)} 條):")
-            for i in range(display_count):
-                print(f"- {all_bus_routes_data[i]['name']}")
-            print("...")
-            for i in range(len(all_bus_routes_data) - display_count, len(all_bus_routes_data)):
-                print(f"- {all_bus_routes_data[i]['name']}")
-        else:
-            for route in all_bus_routes_data:
-                print(f"- {route['name']}")
-        print("----------------------------")
-    else:
-        print("\n警告：未獲取到任何公車路線資訊。")
-        return
 
     while True:
         route_name_input = input("\n請輸入您想查詢的公車路線號碼 (例如: 299, 0東)，或輸入 'exit' 退出: ").strip()
